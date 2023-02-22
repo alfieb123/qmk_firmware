@@ -25,9 +25,10 @@ const uint16_t PROGMEM c_esc[] = {KC_W, KC_E, COMBO_END};
 const uint16_t PROGMEM c_ent[] = {KC_F, KC_G, COMBO_END};
 const uint16_t PROGMEM c_bspc[] = {KC_U, KC_I, COMBO_END};
 const uint16_t PROGMEM c_del[] = {KC_O, KC_P, COMBO_END};
-const uint16_t PROGMEM c_delwrd[] = {KC_I, KC_O, COMBO_END};
+const uint16_t PROGMEM c_delwrd[] = {KC_Y, KC_U, COMBO_END};
 const uint16_t PROGMEM c_tab[] = {KC_Q, KC_W, COMBO_END};
 const uint16_t PROGMEM c_unds[] = {KC_X, KC_C, COMBO_END};
+const uint16_t PROGMEM c_mins[] = {KC_Z, KC_X, COMBO_END};
 const uint16_t PROGMEM c_eql[] = {KC_C, KC_V, COMBO_END};
 combo_t key_combos[COMBO_COUNT] = {
     COMBO(c_esc, KC_ESC), //escape
@@ -37,6 +38,7 @@ combo_t key_combos[COMBO_COUNT] = {
     COMBO(c_delwrd, LCTL(KC_BSPC)), //delete word
     COMBO(c_tab, KC_TAB), // tab
     COMBO(c_unds, KC_UNDS), //underscore
+    COMBO(c_mins, KC_MINS), //hyphen
     COMBO(c_eql, KC_EQL), //equal
     // COMBO(combo2, LCTL(KC_Z)), // keycodes with modifiers are possible too!
 };
@@ -60,9 +62,10 @@ enum
 //Tap Dance Definitions
 qk_tap_dance_action_t tap_dance_actions[] = {
   [BOOT]  = ACTION_TAP_DANCE_DOUBLE(KC_NO, QK_BOOT), //Tap once for NOTHING, twice for QK BOOT
-  [SCWD]  = ACTION_TAP_DANCE_DOUBLE(KC_NO, CW_TOGG) //Tap once or hold once for LSFT, twice for CAPS WORD
+  [SCWD]  = ACTION_TAP_DANCE_DOUBLE(KC_LSFT, CW_TOGG) //Tap once or hold once for LSFT, twice for CAPS WORD
 // Other declarations would go here, separated by commas, if you have them
 };
+
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [0] = LAYOUT_split_3x6_3(
