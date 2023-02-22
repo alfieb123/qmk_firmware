@@ -50,6 +50,20 @@ combo_t key_combos[COMBO_COUNT] = {
 #define WVD_U LGUI(LCTL(KC_RGHT)) //windows virtual desktop up
 #define WVD_D LGUI(LCTL(KC_LEFT)) // windows virtual desktop down
 
+// Tap Dance Declarations
+enum
+{
+    BOOT = 0,
+    SCWD = 1
+};
+
+//Tap Dance Definitions
+qk_tap_dance_action_t tap_dance_actions[] = {
+  [BOOT]  = ACTION_TAP_DANCE_DOUBLE(KC_NO, QK_BOOT), //Tap once for NOTHING, twice for QK BOOT
+  [SCWD]  = ACTION_TAP_DANCE_DOUBLE(KC_NO, CW_TOGG) //Tap once or hold once for LSFT, twice for CAPS WORD
+// Other declarations would go here, separated by commas, if you have them
+};
+
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [0] = LAYOUT_split_3x6_3(
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
@@ -59,7 +73,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       missing,    KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,                         KC_N,    KC_M, LALTCOM, LCTLDOT, LSFTSLH, missing,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                            MO(3), KC_LCTL, KC_LSFT,     KC_SPC,   MO(1),    TT(2) //TT is like MO, only if you tap it multiple times it toggles the layer on.. this is so we have quick access to the alt and such for modelling
+                                            MO(3), KC_LCTL,TD(SCWD),    KC_SPC,   MO(1),    TT(2) //TT is like MO, only if you tap it multiple times it toggles the layer on.. this is so we have quick access to the alt and such for modelling
                                       //`--------------------------'  `--------------------------'
   ),
 
@@ -89,7 +103,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [3] = LAYOUT_split_3x6_3(
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
-      missing,  KC_F12,  KC_F11,  KC_F10,   KC_F9, XXXXXXX,                      LALTTAB, KC_WH_D, KC_WH_U, XXXXXXX, XXXXXXX, missing,
+      missing,  KC_F12,  KC_F11,  KC_F10,   KC_F9, XXXXXXX,                      LALTTAB, KC_WH_D, KC_WH_U, XXXXXXX,TD(BOOT), missing,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       missing,   KC_F8,   KC_F7,   KC_F6,   KC_F5,   WVD_U,                      KC_LEFT, KC_DOWN,   KC_UP, KC_RGHT, XXXXXXX, missing,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
@@ -110,6 +124,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 //                                       //`--------------------------'  `--------------------------'
 //   )
 };
+//_=_={}}{}{{}}}}{}} 
 
 
 
