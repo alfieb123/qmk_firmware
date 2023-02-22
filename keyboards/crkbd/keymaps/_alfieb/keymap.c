@@ -47,7 +47,7 @@ combo_t key_combos[COMBO_COUNT] = {
 #define LALTCOM LALT_T(KC_COMM) 
 #define LCTLDOT LCTL_T(KC_DOT) 
 #define LSFTSLH LCTL_T(KC_SLSH) 
-#define LALTTAB LALT(KC_TAB) 
+#define GUISPCE LGUI_T(KC_SPC)
 
 #define WVD_U LGUI(LCTL(KC_RGHT)) //windows virtual desktop up
 #define WVD_D LGUI(LCTL(KC_LEFT)) // windows virtual desktop down
@@ -76,7 +76,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       missing,    KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,                         KC_N,    KC_M, LALTCOM, LCTLDOT, LSFTSLH, missing,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                            MO(3), KC_LCTL,TD(SCWD),    KC_SPC,   MO(1),    TT(2) //TT is like MO, only if you tap it multiple times it toggles the layer on.. this is so we have quick access to the alt and such for modelling
+                                            MO(3), KC_LCTL, KC_LSFT,    GUISPCE,   MO(1),    TT(2) //TT is like MO, only if you tap it multiple times it toggles the layer on.. this is so we have quick access to the alt and such for modelling
                                       //`--------------------------'  `--------------------------'
   ),
 
@@ -100,19 +100,30 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       missing, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, missing,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                            TG(0), XXXXXXX, XXXXXXX,    XXXXXXX, XXXXXXX, XXXXXXX
+                                            TO(0), XXXXXXX, XXXXXXX,    XXXXXXX, XXXXXXX, XXXXXXX
                                       //`--------------------------'  `--------------------------'
   ),
 
   [3] = LAYOUT_split_3x6_3(
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
-      missing,  KC_F12,  KC_F11,  KC_F10,   KC_F9, XXXXXXX,                      LALTTAB, KC_WH_D, KC_WH_U, XXXXXXX,TD(BOOT), missing,
+      missing,  KC_F12,  KC_F11,  KC_F10,   KC_F9, XXXXXXX,                      XXXXXXX, KC_WH_D, KC_WH_U, XXXXXXX,   MO(4), missing,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       missing,   KC_F8,   KC_F7,   KC_F6,   KC_F5,   WVD_U,                      KC_LEFT, KC_DOWN,   KC_UP, KC_RGHT, XXXXXXX, missing,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       missing,   KC_F4,   KC_F3,   KC_F2,   KC_F1,   WVD_D,                      KC_MS_L, KC_MS_D, KC_MS_U, KC_MS_R, XXXXXXX, missing,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
                                           XXXXXXX, XXXXXXX, XXXXXXX,    KC_BTN1, KC_BTN3, KC_BTN2
+                                      //`--------------------------'  `--------------------------'
+  ),
+  [4] = LAYOUT_split_3x6_3(
+  //,-----------------------------------------------------.                    ,-----------------------------------------------------.
+      missing, QK_BOOT, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, missing,
+  //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
+      missing, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, missing,
+  //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
+      missing, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, missing,
+  //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
+                                          XXXXXXX, XXXXXXX, XXXXXXX,    XXXXXXX, XXXXXXX, XXXXXXX
                                       //`--------------------------'  `--------------------------'
   )
 //   [3] = LAYOUT_split_3x6_3(
@@ -139,60 +150,64 @@ oled_rotation_t oled_init_user(oled_rotation_t rotation) {
   return rotation;
 }
 
-#define L_BASE 0
-#define L_LOWER 2
-#define L_RAISE 4
-#define L_ADJUST 8
+#define L_0 0
+#define L_1 2
+#define L_2 4
+#define L_3 8
+#define L_4 16 
 
 void oled_render_layer_state(void) {
     oled_write_P(PSTR("Layer: "), false);
     switch (layer_state) {
-        case L_BASE:
-            oled_write_ln_P(PSTR("DEFAULT"), false);
+        case L_0:
+            oled_write_ln_P(PSTR("ZERO"), false);
             break;
-        case L_LOWER:
+        case L_1:
             oled_write_ln_P(PSTR("ONE"), false);
             break;
-        case L_RAISE:
+        case L_2:
             oled_write_ln_P(PSTR("TWO"), false);
             break;
-        case L_ADJUST:
-        case L_ADJUST|L_LOWER:
-        case L_ADJUST|L_RAISE:
-        case L_ADJUST|L_LOWER|L_RAISE:
+        case L_3:
+        // case L_ADJUST|L_LOWER:
+        // case L_ADJUST|L_RAISE:
+        // case L_ADJUST|L_LOWER|L_RAISE:
             oled_write_ln_P(PSTR("THREE"), false);
+            break;
+        case L_4:
+            oled_write_ln_P(PSTR("FOUR"), false);
             break;
     }
 }
 
 
-// char keylog_str[24] = {};
+char keylog_str[24] = {};
 
-// const char code_to_name[60] = {
-//     ' ', ' ', ' ', ' ', 'a', 'b', 'c', 'd', 'e', 'f',
-//     'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p',
-//     'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
-//     '1', '2', '3', '4', '5', '6', '7', '8', '9', '0',
-//     'R', 'E', 'B', 'T', '_', '-', '=', '[', ']', '\\',
-//     '#', ';', '\'', '`', ',', '.', '/', ' ', ' ', ' '};
+const char code_to_name[60] = {
+    ' ', ' ', ' ', ' ', 'a', 'b', 'c', 'd', 'e', 'f',
+    'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p',
+    'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
+    '1', '2', '3', '4', '5', '6', '7', '8', '9', '0',
+    'R', 'E', 'B', 'T', '_', '-', '=', '[', ']', '\\',
+    '#', ';', '\'', '`', ',', '.', '/', ' ', ' ', ' '};
 
-// void set_keylog(uint16_t keycode, keyrecord_t *record) {
-//   char name = ' ';
-//     if ((keycode >= QK_MOD_TAP && keycode <= QK_MOD_TAP_MAX) ||
-//         (keycode >= QK_LAYER_TAP && keycode <= QK_LAYER_TAP_MAX)) { keycode = keycode & 0xFF; }
-//   if (keycode < 60) {
-//     name = code_to_name[keycode];
-//   }
+void set_keylog(uint16_t keycode, keyrecord_t *record) {
+  char name = ' ';
+    if ((keycode >= QK_MOD_TAP && keycode <= QK_MOD_TAP_MAX) ||
+        (keycode >= QK_LAYER_TAP && keycode <= QK_LAYER_TAP_MAX)) { keycode = keycode & 0xFF; }
+  if (keycode < 60) {
+    name = code_to_name[keycode];
+  }
 
-//   // update keylog
-//   snprintf(keylog_str, sizeof(keylog_str), "%dx%d, k%2d : %c",
-//            record->event.key.row, record->event.key.col,
-//            keycode, name);
-// }
+  // update keylog
+  snprintf(keylog_str, sizeof(keylog_str), "%dx%d, k%2d : %c",
+           record->event.key.row, record->event.key.col,
+           keycode, name);
+}
 
-// void oled_render_keylog(void) {
-//     oled_write(keylog_str, false);
-// }
+void oled_render_keylog(void) {
+    oled_write(keylog_str, false);
+}
 
 void render_bootmagic_status(bool status) {
     /* Show Ctrl-Gui Swap options */
@@ -221,7 +236,7 @@ void oled_render_logo(void) {
 bool oled_task_user(void) {
     if (is_keyboard_master()) {
         oled_render_layer_state();
-        // oled_render_keylog();
+        oled_render_keylog();
     } else {
         oled_render_logo();
     }
@@ -230,7 +245,7 @@ bool oled_task_user(void) {
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   if (record->event.pressed) {
-    // set_keylog(keycode, record);
+    set_keylog(keycode, record);
   }
   return true;
 }
