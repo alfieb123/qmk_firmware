@@ -21,19 +21,34 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define _______ KC_NO
 #define missing KC_NO
 
-const uint16_t PROGMEM combo1[] = {KC_W, KC_E, COMBO_END};
-const uint16_t PROGMEM combo2[] = {KC_E, KC_R, COMBO_END};
-const uint16_t PROGMEM combo3[] = {KC_U, KC_I, COMBO_END};
-const uint16_t PROGMEM combo4[] = {KC_O, KC_P, COMBO_END};
-const uint16_t PROGMEM combo5[] = {KC_I, KC_O, COMBO_END};
+const uint16_t PROGMEM c_esc[] = {KC_W, KC_E, COMBO_END};
+const uint16_t PROGMEM c_ent[] = {KC_F, KC_G, COMBO_END};
+const uint16_t PROGMEM c_bspc[] = {KC_U, KC_I, COMBO_END};
+const uint16_t PROGMEM c_del[] = {KC_O, KC_P, COMBO_END};
+const uint16_t PROGMEM c_delwrd[] = {KC_I, KC_O, COMBO_END};
+const uint16_t PROGMEM c_tab[] = {KC_Q, KC_W, COMBO_END};
+const uint16_t PROGMEM c_unds[] = {KC_X, KC_C, COMBO_END};
+const uint16_t PROGMEM c_eql[] = {KC_C, KC_V, COMBO_END};
 combo_t key_combos[COMBO_COUNT] = {
-    COMBO(combo1, KC_ESC), //escape
-    COMBO(combo2, KC_ENT), //enter
-    COMBO(combo3, KC_BSPC), // backspace
-    COMBO(combo4, KC_DEL), //delete
-    COMBO(combo5, LCTL(KC_BSPC)), //delete word
+    COMBO(c_esc, KC_ESC), //escape
+    COMBO(c_ent, KC_ENT), //enter
+    COMBO(c_bspc, KC_BSPC), // backspace
+    COMBO(c_del, KC_DEL), //delete
+    COMBO(c_delwrd, LCTL(KC_BSPC)), //delete word
+    COMBO(c_tab, KC_TAB), // tab
+    COMBO(c_unds, KC_UNDS), //underscore
+    COMBO(c_eql, KC_EQL), //equal
     // COMBO(combo2, LCTL(KC_Z)), // keycodes with modifiers are possible too!
 };
+
+#define SNUBS LSFT(KC_NUBS) 
+#define LALTCOM LALT_T(KC_COMM) 
+#define LCTLDOT LCTL_T(KC_DOT) 
+#define LSFTSLH LCTL_T(KC_SLSH) 
+#define LALTTAB LALT(KC_TAB) 
+
+#define WVD_U LGUI(LCTL(KC_RGHT)) //windows virtual desktop up
+#define WVD_D LGUI(LCTL(KC_LEFT)) // windows virtual desktop down
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [0] = LAYOUT_split_3x6_3(
@@ -42,47 +57,58 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       missing,    KC_A,    KC_S,    KC_D,    KC_F,    KC_G,                         KC_H,    KC_J,    KC_K,    KC_L, KC_SCLN, missing,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      missing,    KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,                         KC_N,    KC_M, KC_COMM,  KC_DOT, KC_SLSH, missing,
+      missing,    KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,                         KC_N,    KC_M, LALTCOM, LCTLDOT, LSFTSLH, missing,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                           KC_ENT,  KC_ESC, KC_LSFT,     KC_SPC,   MO(2), KC_RALT
+                                            MO(3), KC_LCTL, KC_LSFT,     KC_SPC,   MO(1),    TT(2) //TT is like MO, only if you tap it multiple times it toggles the layer on.. this is so we have quick access to the alt and such for modelling
                                       //`--------------------------'  `--------------------------'
   ),
 
   [1] = LAYOUT_split_3x6_3(
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
-      missing,    KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                         KC_6,    KC_7,    KC_8,    KC_9,    KC_0, missing,
+      missing, KC_EXLM, KC_DQUO, KC_LCBR, KC_RCBR, KC_PIPE,                      XXXXXXX,    KC_7,    KC_8,    KC_9, KC_PAST, missing,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      missing, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                      KC_LEFT, KC_DOWN,   KC_UP,KC_RIGHT, XXXXXXX, missing,
+      missing, KC_NUHS,  KC_DLR, KC_LPRN, KC_RPRN,   SNUBS,                       KC_DOT,    KC_4,    KC_5,    KC_6, KC_PPLS, missing,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      missing, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, missing,
+      missing, KC_PERC, KC_HASH, KC_LBRC, KC_RBRC, KC_AMPR,                         KC_0,    KC_1,    KC_2,    KC_3, KC_PMNS, missing,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                          KC_LGUI, _______,  KC_SPC,     KC_ENT,   MO(3), KC_RALT
+                                          XXXXXXX, XXXXXXX, XXXXXXX,    XXXXXXX, XXXXXXX, XXXXXXX
                                       //`--------------------------'  `--------------------------'
   ),
 
   [2] = LAYOUT_split_3x6_3(
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
-      missing, KC_EXLM,   KC_AT, KC_HASH,  KC_DLR, KC_PERC,                      KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, missing,
+      missing, XXXXXXX, KC_QUOT, KC_MINS, KC_CIRC, XXXXXXX,                      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, missing,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      missing, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                      KC_MINS,  KC_EQL, KC_LBRC, KC_RBRC, KC_BSLS, missing,
+      missing, XXXXXXX,   KC_AT, KC_UNDS,  KC_EQL, XXXXXXX,                      XXXXXXX, KC_LALT, KC_LCTL, KC_LSFT, XXXXXXX, missing,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      missing, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                      KC_UNDS, KC_PLUS, KC_LCBR, KC_RCBR, KC_PIPE, missing,
+      missing, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, missing,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                          KC_LGUI,   MO(3),  KC_SPC,     KC_ENT, _______, KC_RALT
+                                            TG(0), XXXXXXX, XXXXXXX,    XXXXXXX, XXXXXXX, XXXXXXX
                                       //`--------------------------'  `--------------------------'
   ),
 
   [3] = LAYOUT_split_3x6_3(
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
-      missing, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, missing,
+      missing,  KC_F12,  KC_F11,  KC_F10,   KC_F9, XXXXXXX,                      LALTTAB, KC_WH_D, KC_WH_U, XXXXXXX, XXXXXXX, missing,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      missing, RGB_HUI, RGB_SAI, RGB_VAI, XXXXXXX, XXXXXXX,                      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, missing,
+      missing,   KC_F8,   KC_F7,   KC_F6,   KC_F5,   WVD_U,                      KC_LEFT, KC_DOWN,   KC_UP, KC_RGHT, XXXXXXX, missing,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      missing, RGB_HUD, RGB_SAD, RGB_VAD, XXXXXXX, XXXXXXX,                      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, missing,
+      missing,   KC_F4,   KC_F3,   KC_F2,   KC_F1,   WVD_D,                      KC_MS_L, KC_MS_D, KC_MS_U, KC_MS_R, XXXXXXX, missing,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                          KC_LGUI, _______,  KC_SPC,     KC_ENT, _______, KC_RALT
+                                          XXXXXXX, XXXXXXX, XXXXXXX,    KC_BTN1, KC_BTN3, KC_BTN2
                                       //`--------------------------'  `--------------------------'
   )
+//   [3] = LAYOUT_split_3x6_3(
+//   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
+//       missing, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, missing,
+//   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
+//       missing, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, missing,
+//   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
+//       missing, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, missing,
+//   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
+//                                           XXXXXXX, XXXXXXX, XXXXXXX,    XXXXXXX, XXXXXXX, XXXXXXX
+//                                       //`--------------------------'  `--------------------------'
+//   )
 };
 
 
@@ -104,19 +130,19 @@ void oled_render_layer_state(void) {
     oled_write_P(PSTR("Layer: "), false);
     switch (layer_state) {
         case L_BASE:
-            oled_write_ln_P(PSTR("Default"), false);
+            oled_write_ln_P(PSTR("DEFAULT"), false);
             break;
         case L_LOWER:
-            oled_write_ln_P(PSTR("Lower"), false);
+            oled_write_ln_P(PSTR("ONE"), false);
             break;
         case L_RAISE:
-            oled_write_ln_P(PSTR("Raise"), false);
+            oled_write_ln_P(PSTR("TWO"), false);
             break;
         case L_ADJUST:
         case L_ADJUST|L_LOWER:
         case L_ADJUST|L_RAISE:
         case L_ADJUST|L_LOWER|L_RAISE:
-            oled_write_ln_P(PSTR("Adjust"), false);
+            oled_write_ln_P(PSTR("THREE"), false);
             break;
     }
 }
