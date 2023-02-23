@@ -47,7 +47,6 @@ combo_t key_combos[COMBO_COUNT] = {
 #define LALTCOM LALT_T(KC_COMM) 
 #define LCTLDOT LCTL_T(KC_DOT) 
 #define LSFTSLH LCTL_T(KC_SLSH) 
-#define GUISPCE LGUI_T(KC_SPC)
 
 #define WVD_U LGUI(LCTL(KC_RGHT)) //windows virtual desktop up
 #define WVD_D LGUI(LCTL(KC_LEFT)) // windows virtual desktop down
@@ -76,7 +75,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       missing,    KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,                         KC_N,    KC_M, LALTCOM, LCTLDOT, LSFTSLH, missing,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                            MO(3), KC_LCTL, KC_LSFT,    GUISPCE,   MO(1),    TT(2) //TT is like MO, only if you tap it multiple times it toggles the layer on.. this is so we have quick access to the alt and such for modelling
+                                            MO(3), KC_LCTL, KC_LSFT,     KC_SPC,   MO(1),    TT(2) //TT is like MO, only if you tap it multiple times it toggles the layer on.. this is so we have quick access to the alt and such for modelling
                                       //`--------------------------'  `--------------------------'
   ),
 
