@@ -18,33 +18,38 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include QMK_KEYBOARD_H
 #include <stdio.h>
-#define _______ KC_NO
-#define missing KC_NO
 
-const uint16_t PROGMEM c_esc[] = {KC_X, KC_C, COMBO_END};
-const uint16_t PROGMEM c_ent[] = {KC_F, KC_G, COMBO_END};
-const uint16_t PROGMEM c_bspc[] = {KC_U, KC_I, COMBO_END};
-const uint16_t PROGMEM c_del[] = {KC_O, KC_P, COMBO_END};
-const uint16_t PROGMEM c_delwrd[] = {KC_Y, KC_U, COMBO_END};
-const uint16_t PROGMEM c_tab[] = {KC_Q, KC_W, COMBO_END};
+// const uint16_t PROGMEM c_esc[] = {KC_X, KC_C, COMBO_END};
+// const uint16_t PROGMEM c_ent[] = {KC_F, KC_G, COMBO_END};
+// const uint16_t PROGMEM c_bspc[] = {KC_U, KC_I, COMBO_END};
+// const uint16_t PROGMEM c_del[] = {KC_O, KC_P, COMBO_END};
+// const uint16_t PROGMEM c_delwrd[] = {KC_Y, KC_U, COMBO_END};
+// const uint16_t PROGMEM c_tab[] = {KC_Q, KC_W, COMBO_END};
 // const uint16_t PROGMEM c_unds[] = {KC_X, KC_C, COMBO_END};
 // const uint16_t PROGMEM c_eql[] = {KC_C, KC_V, COMBO_END};
 combo_t key_combos[COMBO_COUNT] = {
-    COMBO(c_esc, KC_ESC), //escape
-    COMBO(c_ent, KC_ENT), //enter
-    COMBO(c_bspc, KC_BSPC), // backspace
-    COMBO(c_del, KC_DEL), //delete
-    COMBO(c_delwrd, LCTL(KC_BSPC)), //delete word
-    COMBO(c_tab, KC_TAB), // tab
+    // COMBO(c_esc, KC_ESC), //escape
+    // COMBO(c_ent, KC_ENT), //enter
+    // COMBO(c_bspc, KC_BSPC), // backspace
+    // COMBO(c_del, KC_DEL), //delete
+    // COMBO(c_delwrd, LCTL(KC_BSPC)), //delete word
+    // COMBO(c_tab, KC_TAB), // tab
     // COMBO(c_unds, KC_UNDS), //underscore
     // COMBO(c_eql, KC_EQL), //equal
     // COMBO(combo2, LCTL(KC_Z)), // keycodes with modifiers are possible too!
 };
 
+#define _______ KC_NO
+#define missing KC_NO
 #define SNUBS LSFT(KC_NUBS) 
 #define LALTCOM LALT_T(KC_COMM) 
 #define LCTLDOT LCTL_T(KC_DOT) 
-#define LSFTSLH LCTL_T(KC_SLSH) 
+#define LSFTSLH LSFT_T(KC_SLSH) 
+#define LCTLESC LCTL_T(KC_ESC) 
+#define DELWRD LCTL(KC_BSPC)
+#define LT1TAB LT(1, KC_TAB)
+#define LT2BSPC LT(2, KC_BSPC)
+#define LT3ENT LT(3, KC_ENT)
 
 #define WVD_U LGUI(LCTL(KC_RGHT)) //windows virtual desktop up
 #define WVD_D LGUI(LCTL(KC_LEFT)) // windows virtual desktop down
@@ -73,7 +78,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       missing,    KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,                         KC_N,    KC_M, LALTCOM, LCTLDOT, LSFTSLH, missing,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                            MO(3), KC_LCTL, KC_LSFT,     KC_SPC,   MO(1),    TT(2) //TT is like MO, only if you tap it multiple times it toggles the layer on.. this is so we have quick access to the alt and such for modelling
+                                           LT3ENT, LCTLESC, KC_LSFT,     KC_SPC,  LT1TAB,  LT2BSPC
                                       //`--------------------------'  `--------------------------'
   ),
 
@@ -85,15 +90,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------+--------j                    |--------+--------+--------+--------+--------+--------|
       missing, KC_PERC, KC_HASH, KC_LBRC, KC_RBRC, KC_AMPR,                         KC_0,    KC_1,    KC_2,    KC_3, KC_PMNS, missing,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                          XXXXXXX, XXXXXXX, XXXXXXX,    XXXXXXX, XXXXXXX, XXXXXXX
+                                          XXXXXXX,  KC_TAB, XXXXXXX,    XXXXXXX, XXXXXXX,   KC_DEL
                                       //`--------------------------'  `--------------------------'
   ),
 
   [2] = LAYOUT_split_3x6_3(
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
-      missing, XXXXXXX, KC_QUOT, KC_MINS, KC_CIRC, XXXXXXX,                      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, missing,
+      missing, XXXXXXX, KC_QUOT, KC_MINS, KC_CIRC, XXXXXXX,                      XXXXXXX, XXXXXXX, XXXXXXX,  DELWRD, KC_BSPC, missing,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      missing, XXXXXXX,   KC_AT, KC_UNDS,  KC_EQL, XXXXXXX,                      XXXXXXX, KC_LALT, KC_LCTL, KC_LSFT, XXXXXXX, missing,
+      missing, XXXXXXX,   KC_AT, KC_UNDS,  KC_EQL, XXXXXXX,                      XXXXXXX, KC_LALT, KC_LCTL, KC_LSFT,  KC_DEL, missing,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       missing, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, missing,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
