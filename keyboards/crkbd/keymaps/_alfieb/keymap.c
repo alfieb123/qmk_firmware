@@ -19,23 +19,23 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include QMK_KEYBOARD_H
 #include <stdio.h>
 
-// const uint16_t PROGMEM c_esc[] = {KC_X, KC_C, COMBO_END};
-// const uint16_t PROGMEM c_ent[] = {KC_F, KC_G, COMBO_END};
-// const uint16_t PROGMEM c_bspc[] = {KC_U, KC_I, COMBO_END};
-// const uint16_t PROGMEM c_del[] = {KC_O, KC_P, COMBO_END};
-// const uint16_t PROGMEM c_delwrd[] = {KC_Y, KC_U, COMBO_END};
-// const uint16_t PROGMEM c_tab[] = {KC_Q, KC_W, COMBO_END};
-// const uint16_t PROGMEM c_unds[] = {KC_X, KC_C, COMBO_END};
-// const uint16_t PROGMEM c_eql[] = {KC_C, KC_V, COMBO_END};
+const uint16_t PROGMEM c_esc[] = {KC_W, KC_E, COMBO_END};
+const uint16_t PROGMEM c_ent[] = {KC_S, KC_D, COMBO_END};
+const uint16_t PROGMEM c_bspc[] = {KC_I, KC_O, COMBO_END};
+const uint16_t PROGMEM c_del[] = {KC_O, KC_P, COMBO_END};
+const uint16_t PROGMEM c_delwrd[] = {KC_U, KC_I, COMBO_END};
+const uint16_t PROGMEM c_tab[] = {KC_Q, KC_W, COMBO_END};
+const uint16_t PROGMEM c_unds[] = {KC_X, KC_C, COMBO_END};
+const uint16_t PROGMEM c_eql[] = {KC_D, KC_F, COMBO_END};
 combo_t key_combos[COMBO_COUNT] = {
-    // COMBO(c_esc, KC_ESC), //escape
-    // COMBO(c_ent, KC_ENT), //enter
-    // COMBO(c_bspc, KC_BSPC), // backspace
-    // COMBO(c_del, KC_DEL), //delete
-    // COMBO(c_delwrd, LCTL(KC_BSPC)), //delete word
-    // COMBO(c_tab, KC_TAB), // tab
-    // COMBO(c_unds, KC_UNDS), //underscore
-    // COMBO(c_eql, KC_EQL), //equal
+    COMBO(c_esc, KC_ESC), //escape
+    COMBO(c_ent, KC_ENT), //enter
+    COMBO(c_bspc, KC_BSPC), // backspace
+    COMBO(c_del, KC_DEL), //delete
+    COMBO(c_delwrd, LCTL(KC_BSPC)), //delete word
+    COMBO(c_tab, KC_TAB), // tab
+    COMBO(c_unds, KC_UNDS), //underscore
+    COMBO(c_eql, KC_EQL), //equal
     // COMBO(combo2, LCTL(KC_Z)), // keycodes with modifiers are possible too!
 };
 
@@ -79,7 +79,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       missing,    KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,                         KC_N,    KC_M, LALTCOM, LCTLDOT, LSFTSLH, missing,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                           LT3ENT, LCTLESC, KC_LSFT,     KC_SPC,  LT1TAB,  KC_BSPC
+                                            MO(3), KC_LCTL, KC_LSFT,     KC_SPC,  MO(1),  KC_BSPC
                                       //`--------------------------'  `--------------------------'
   ),
 
