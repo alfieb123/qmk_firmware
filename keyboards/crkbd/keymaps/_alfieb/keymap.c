@@ -49,6 +49,7 @@ combo_t key_combos[COMBO_COUNT] = {
 #define DELWRD LCTL(KC_BSPC)
 #define LT1TAB LT(1, KC_TAB)
 #define LT2BSPC LT(2, KC_BSPC)
+#define LT2SCLN LT(2, KC_SCLN)
 #define LT3ENT LT(3, KC_ENT)
 
 #define WVD_U LGUI(LCTL(KC_RGHT)) //windows virtual desktop up
@@ -74,11 +75,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
       missing,    KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                         KC_Y,    KC_U,    KC_I,    KC_O,   KC_P,  missing,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      missing,    KC_A,    KC_S,    KC_D,    KC_F,    KC_G,                         KC_H,    KC_J,    KC_K,    KC_L, KC_SCLN, missing,
+      missing,    KC_A,    KC_S,    KC_D,    KC_F,    KC_G,                         KC_H,    KC_J,    KC_K,    KC_L, LT2SCLN, missing,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       missing,    KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,                         KC_N,    KC_M, LALTCOM, LCTLDOT, LSFTSLH, missing,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                           LT3ENT, KC_LSFT, LCTLESC,     LT1TAB,  KC_SPC,  LT2BSPC
+                                           LT3ENT, LCTLESC, KC_LSFT,     KC_SPC,  LT1TAB,  KC_BSPC
                                       //`--------------------------'  `--------------------------'
   ),
 
@@ -96,13 +97,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [2] = LAYOUT_split_3x6_3(
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
-      missing, XXXXXXX, KC_QUOT, KC_MINS, KC_CIRC, XXXXXXX,                      XXXXXXX, XXXXXXX, XXXXXXX,  DELWRD, KC_BSPC, missing,
+      missing, XXXXXXX, KC_QUOT, KC_MINS, KC_CIRC, XXXXXXX,                      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, missing,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      missing, XXXXXXX,   KC_AT, KC_UNDS,  KC_EQL, XXXXXXX,                      XXXXXXX, KC_LALT, KC_LCTL, KC_LSFT,  KC_DEL, missing,
+      missing, XXXXXXX,   KC_AT, KC_UNDS,  KC_EQL, XXXXXXX,                      XXXXXXX, KC_LALT, KC_LCTL, KC_LSFT, XXXXXXX, missing,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       missing, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, missing,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                            TO(0), XXXXXXX, XXXXXXX,    XXXXXXX, XXXXXXX, XXXXXXX
+                                          XXXXXXX, XXXXXXX, XXXXXXX,    XXXXXXX, XXXXXXX, XXXXXXX
                                       //`--------------------------'  `--------------------------'
   ),
 
