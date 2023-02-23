@@ -78,7 +78,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       missing,    KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,                         KC_N,    KC_M, LALTCOM, LCTLDOT, LSFTSLH, missing,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                           LT3ENT, LCTLESC, KC_LSFT,     KC_SPC,  LT1TAB,  LT2BSPC
+                                           LT3ENT, KC_LSFT, LCTLESC,     LT1TAB,  KC_SPC,  LT2BSPC
                                       //`--------------------------'  `--------------------------'
   ),
 
