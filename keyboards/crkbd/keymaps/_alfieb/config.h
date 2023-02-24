@@ -30,7 +30,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //#define TAPPING_FORCE_HOLD
 //#define TAPPING_TERM 100
 
-#define COMBO_COUNT 9
+#define COMBO_COUNT 10
 #define COMBO_TERM 30 
 
 // #define AUTO_SHIFT_TIMEOUT 150
