@@ -29,6 +29,9 @@ const uint16_t PROGMEM c_unds[] = {KC_X, KC_C, COMBO_END};
 const uint16_t PROGMEM c_mins[] = {KC_C, KC_V, COMBO_END};
 const uint16_t PROGMEM c_eql[] = {KC_D, KC_F, COMBO_END};
 const uint16_t PROGMEM c_dquo[] = {KC_I, KC_O, COMBO_END};
+const uint16_t PROGMEM c_mo3[] = {KC_A, KC_S, COMBO_END};
+const uint16_t PROGMEM c_lgui[] = {KC_R, KC_T, COMBO_END};
+const uint16_t PROGMEM c_lgui2[] = {KC_Y, KC_U, COMBO_END};
 combo_t key_combos[COMBO_COUNT] = {
     COMBO(c_esc, KC_ESC), //escape
     COMBO(c_ent, KC_ENT), //enter
@@ -40,6 +43,9 @@ combo_t key_combos[COMBO_COUNT] = {
     COMBO(c_mins, KC_MINS), //minus
     COMBO(c_eql, KC_EQL), //equal
     COMBO(c_dquo, KC_AT), // this is a double quote ". notice we are using kc_at which is noramlly the at symbol but not on uk for some reason.
+    COMBO(c_mo3, MO(3)), // layer toggle to layer
+    COMBO(c_lgui, KC_LGUI), // Os key
+    COMBO(c_lgui2, KC_LGUI), // Os key
     // COMBO(combo2, LCTL(KC_Z)), // keycodes with modifiers are possible too!
 };
 
@@ -72,6 +78,7 @@ qk_tap_dance_action_t tap_dance_actions[] = {
   [SCWD]  = ACTION_TAP_DANCE_DOUBLE(KC_LSFT, CW_TOGG) //Tap once or hold once for LSFT, twice for CAPS WORD
 // Other declarations would go here, separated by commas, if you have them
 };
+// yuyuuyiurttrrtrtyuyuuyyuuyyurtrtrtyuuyyurtrt
 
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -83,7 +90,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       missing,    KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,                         KC_N,    KC_M, LALTCOM, LCTLDOT, LSFTSLH, missing,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                            MO(3), KC_LCTL, KC_LSFT,     KC_SPC,  MO(1),  KC_LGUI
+                                          XXXXXXX, KC_LCTL, KC_LSFT,     KC_SPC,  MO(1),   XXXXXXX
                                       //`--------------------------'  `--------------------------'
   ),
 
@@ -95,7 +102,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------+--------j                    |--------+--------+--------+--------+--------+--------|
       missing, KC_PERC, KC_HASH, KC_LBRC, KC_RBRC, KC_AMPR,                         KC_0,    KC_1,    KC_2,    KC_3, KC_PMNS, missing,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                          XXXXXXX,  KC_TAB, XXXXXXX,    XXXXXXX, XXXXXXX,   KC_DEL
+                                          XXXXXXX,  KC_TAB, XXXXXXX,    XXXXXXX, XXXXXXX,  XXXXXXX
                                       //`--------------------------'  `--------------------------'
   ),
 
@@ -119,7 +126,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       missing,   KC_F4,   KC_F3,   KC_F2,   KC_F1,   WVD_D,                      KC_MS_L, KC_MS_D, KC_MS_U, KC_MS_R, XXXXXXX, missing,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                          XXXXXXX, XXXXXXX, XXXXXXX,    KC_BTN3, KC_BTN3, KC_BTN2
+                                          XXXXXXX, XXXXXXX, XXXXXXX,    KC_BTN1, KC_BTN2,  XXXXXXX
                                       //`--------------------------'  `--------------------------'
   ),
   [4] = LAYOUT_split_3x6_3(
