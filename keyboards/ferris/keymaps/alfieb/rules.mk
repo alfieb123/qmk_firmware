@@ -1,3 +1,8 @@
+# bootloader for pro micro
+# BOOTLOADER = caterina
+# bootloader for elite-c
+BOOTLOADER = atmel-dfu
+
 BOOTMAGIC_ENABLE = yes      # Enable Bootmagic Lite
 TAP_DANCE_ENABLE = yes
 MOUSEKEY_ENABLE = yes    # Mouse keys

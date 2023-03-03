@@ -2,7 +2,9 @@
 MCU = atmega32u4
 
 # Bootloader selection
-BOOTLOADER = caterina
+# BOOTLOADER = caterina
+# CHANGED THIS FOR MY REPO! alfieb
+BOOTLOADER = atmel-dfu
 
 # Build Options
 #   change yes to no to disable

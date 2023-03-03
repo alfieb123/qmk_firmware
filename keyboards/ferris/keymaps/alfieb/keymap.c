@@ -74,7 +74,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|-------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+
         KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,                         KC_N,    KC_M, LALTCOM, LCTLDOT, LSFTSLH,
   //|-------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+
-                                         KC_LCTL, KC_LSFT,     KC_SPC,  MO(1), 
+                                         KC_LCTL, KC_LSFT,     KC_SPC,  MO(1) 
                                       //-----------------'  `------------------
   ),
 
@@ -86,7 +86,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|-------+--------+--------+--------+--------j                    |--------+--------+--------+--------+--------+
      KC_PERC, KC_HASH, KC_LBRC, KC_RBRC, KC_AMPR,                         KC_0,    KC_1,    KC_2,    KC_3, KC_PMNS,
   //|-------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+
-                                          KC_TAB, XXXXXXX,    XXXXXXX, XXXXXXX,
+                                          KC_TAB, XXXXXXX,    XXXXXXX, XXXXXXX
                                       //-----------------'  `------------------
   ),
 
@@ -110,7 +110,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|-------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+
        KC_F4,   KC_F3,   KC_F2,   KC_F1,   WVD_D,                      KC_MS_L, KC_MS_D, KC_MS_U, KC_MS_R, XXXXXXX,
   //|-------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+
-                                         XXXXXXX, XXXXXXX,    KC_BTN1, KC_BTN2,
+                                         XXXXXXX, XXXXXXX,    KC_BTN1, KC_BTN2
                                       //-----------------'  `------------------
   ),
   [4] = LAYOUT(
