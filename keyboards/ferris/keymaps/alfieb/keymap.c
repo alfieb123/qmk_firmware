@@ -19,33 +19,33 @@ enum ferris_tap_dances {
   TD_Q_ESC
 };
 
-const uint16_t PROGMEM c_esc[] = {KC_W, KC_E, COMBO_END};
-const uint16_t PROGMEM c_ent[] = {KC_S, KC_D, COMBO_END};
-const uint16_t PROGMEM c_bspc[] = {KC_K, KC_L, COMBO_END};
-const uint16_t PROGMEM c_del[] = {KC_O, KC_P, COMBO_END};
-const uint16_t PROGMEM c_delwrd[] = {KC_J, KC_K, COMBO_END};
+// const uint16_t PROGMEM c_esc[] = {KC_W, KC_E, COMBO_END};
+// const uint16_t PROGMEM c_ent[] = {KC_S, KC_D, COMBO_END};
+// const uint16_t PROGMEM c_bspc[] = {KC_K, KC_L, COMBO_END};
+// const uint16_t PROGMEM c_del[] = {KC_O, KC_P, COMBO_END};
+// const uint16_t PROGMEM c_delwrd[] = {KC_J, KC_K, COMBO_END};
 const uint16_t PROGMEM c_tab[] = {KC_Q, KC_W, COMBO_END};
 const uint16_t PROGMEM c_unds[] = {KC_X, KC_C, COMBO_END};
 const uint16_t PROGMEM c_mins[] = {KC_C, KC_V, COMBO_END};
 const uint16_t PROGMEM c_eql[] = {KC_D, KC_F, COMBO_END};
 const uint16_t PROGMEM c_dquo[] = {KC_I, KC_O, COMBO_END};
-const uint16_t PROGMEM c_mo3[] = {KC_A, KC_S, COMBO_END};
-const uint16_t PROGMEM c_lgui[] = {KC_R, KC_T, COMBO_END};
-const uint16_t PROGMEM c_lgui2[] = {KC_Y, KC_U, COMBO_END};
+// const uint16_t PROGMEM c_mo3[] = {KC_A, KC_S, COMBO_END};
+// const uint16_t PROGMEM c_lgui[] = {KC_R, KC_T, COMBO_END};
+// const uint16_t PROGMEM c_lgui2[] = {KC_Y, KC_U, COMBO_END};
 combo_t key_combos[COMBO_COUNT] = {
-    COMBO(c_esc, KC_ESC), //escape
-    COMBO(c_ent, KC_ENT), //enter
-    COMBO(c_bspc, KC_BSPC), // backspace
-    COMBO(c_del, KC_DEL), //delete
-    COMBO(c_delwrd, LCTL(KC_BSPC)), //delete word
+   //  COMBO(c_esc, KC_ESC), //escape
+   //  COMBO(c_ent, KC_ENT), //enter
+   //  COMBO(c_bspc, KC_BSPC), // backspace
+   //  COMBO(c_del, KC_DEL), //delete
+   //  COMBO(c_delwrd, LCTL(KC_BSPC)), //delete word
     COMBO(c_tab, KC_TAB), // tab
     COMBO(c_unds, KC_UNDS), //underscore
     COMBO(c_mins, KC_MINS), //minus
     COMBO(c_eql, KC_EQL), //equal
     COMBO(c_dquo, KC_AT), // this is a double quote ". notice we are using kc_at which is noramlly the at symbol but not on uk for some reason.
-    COMBO(c_mo3, MO(3)), // layer toggle to layer
-    COMBO(c_lgui, KC_LGUI), // Os key
-    COMBO(c_lgui2, KC_LGUI), // Os key
+   //  COMBO(c_mo3, MO(3)), // layer toggle to layer
+   //  COMBO(c_lgui, KC_LGUI), // Os key
+   //  COMBO(c_lgui2, KC_LGUI), // Os key
     // COMBO(combo2, LCTL(KC_Z)), // keycodes with modifiers are possible too!
 };
 
@@ -72,14 +72,14 @@ layer 4, mouse
 #define CTL_KCK LCTL_T(KC_K)
 #define SFT_KCJ LSFT_T(KC_J)
 
-#define GUI_NUS LGUI_T(KC_NUHS)
-#define ALT_DLR LALT_T(KC_DLR)
-#define CTL_LPR LCTL_T(KC_LPRN)
-#define SFT_RPR LSFT_T(KC_RPRN)
+// #define GUI_NUS LGUI_T(KC_NUHS)
+// #define ALT_DLR LALT_T(KC_DLR)
+// #define CTL_LPR LCTL_T(KC_LPRN)
+// #define SFT_RPR LSFT_T(KC_RPRN)
 
-#define ALT__AT LALT_T(KC_AT)
-#define CTL_UND LCTL_T(KC_UNDS)
-#define SFT_EQL LSFT_T(KC_EQL)
+// #define ALT__AT LALT_T(KC_AT)
+// #define CTL_UND LCTL_T(KC_UNDS)
+// #define SFT_EQL LSFT_T(KC_EQL)
 
 
 #define GUI_PLS LGUI_T(KC_PPLS)
@@ -108,7 +108,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|-------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+
         KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,                         KC_N,    KC_M, KC_COMM,  KC_DOT, KC_SLSH,
   //|-------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+
-                                         LT2_ESC, LT1_ENT,     KC_SPC,  LT1_BSP
+                                         LT1_ENT, LT2_ESC,     KC_SPC,  LT1_BSP
                                       //-----------------'  `------------------
   ),
 
@@ -116,7 +116,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //,-------------------------------------------.                    ,---------------------------------------------
      KC_EXLM, KC_DQUO, KC_LCBR, KC_RCBR, KC_PIPE,                      _______, KC_CIRC, KC_MINS, KC_QUOT, _______,
   //|-------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+
-     GUI_NUS, ALT_DLR, CTL_LPR, SFT_RPR,   SNUBS,                      _______, SFT_EQL, CTL_UND, ALT__AT, KC_LGUI,
+     KC_NUHS,  KC_DLR, KC_LPRN, KC_RPRN,   SNUBS,                      _______,  KC_EQL, KC_UNDS,   KC_AT, KC_LGUI,
   //|-------+--------+--------+--------+--------j                    |--------+--------+--------+--------+--------+
      KC_PERC, KC_HASH, KC_LBRC, KC_RBRC, KC_AMPR,                      _______, KC_NUBS, _______, _______, _______,
   //|-------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+
