@@ -70,7 +70,7 @@ layer 4, mouse
 #define GUI_SCN LGUI_T(KC_SCLN)
 #define ALT_KCL LALT_T(KC_L)
 #define CTL_KCK LCTL_T(KC_K)
-#define SFT_KCJ LSFT_T(KC_J)
+#define SFT_KCJ RSFT_T(KC_J)
 
 // #define GUI_NUS LGUI_T(KC_NUHS)
 // #define ALT_DLR LALT_T(KC_DLR)
