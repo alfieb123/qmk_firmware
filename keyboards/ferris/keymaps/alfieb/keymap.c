@@ -98,6 +98,9 @@ layer 4, mouse
 #define LT3_KCE LT(3, KC_E)
 #define LT4_KCT LT(4, KC_T)
 
+#define WVD_NXT LGUI(LCTL(KC_RGHT))
+#define WVD_PRV LGUI(LCTL(KC_LEFT))
+
                                   
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [0] = LAYOUT(
@@ -126,13 +129,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [2] = LAYOUT(
   //,-------------------------------------------.                    ,---------------------------------------------
-      KC_F12,  KC_F11,  KC_F10,   KC_F9, _______,                      _______,    KC_7,    KC_8,    KC_9, KC_PAST,
+      KC_F12,  KC_F11,  KC_F10,   KC_F9, _______,                       KC_EQL,    KC_7,    KC_8,    KC_9, KC_PAST,
   //|-------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+
-     GUI__F8, ALT__F7, CTL__F6, SFT__F5, _______,                       KC_DOT, SFT_NU4, CTL_NU5, ALT_NU6, GUI_PLS,
+     GUI__F8, ALT__F7, CTL__F6, SFT__F5, WVD_NXT,                       KC_DOT, SFT_NU4, CTL_NU5, ALT_NU6, GUI_PLS,
   //|-------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+
-       KC_F4,   KC_F3,   KC_F2,   KC_F1, _______,                         KC_0,    KC_1,    KC_2,    KC_3, KC_PMNS,
+       KC_F4,   KC_F3,   KC_F2,   KC_F1, WVD_PRV,                         KC_0,    KC_1,    KC_2,    KC_3, KC_PMNS,
   //|-------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+
-                                         _______, _______,    _______,  _______
+                                         _______, _______,    _______,   KC_DEL
                                       //-----------------'  `------------------
   ),
 
