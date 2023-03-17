@@ -21,13 +21,13 @@ enum ferris_tap_dances {
 
 // const uint16_t PROGMEM c_esc[] = {KC_W, KC_E, COMBO_END};
 // const uint16_t PROGMEM c_ent[] = {KC_S, KC_D, COMBO_END};
-// const uint16_t PROGMEM c_bspc[] = {KC_K, KC_L, COMBO_END};
-// const uint16_t PROGMEM c_del[] = {KC_O, KC_P, COMBO_END};
-// const uint16_t PROGMEM c_delwrd[] = {KC_J, KC_K, COMBO_END};
+const uint16_t PROGMEM c_bspc[] = {KC_M, KC_COMM, COMBO_END};
+const uint16_t PROGMEM c_del[] = {KC_COMM, KC_DOT, COMBO_END};
+const uint16_t PROGMEM c_delwrd[] = {KC_N, KC_M, COMBO_END};
 const uint16_t PROGMEM c_tab[] = {KC_Q, KC_W, COMBO_END};
 const uint16_t PROGMEM c_unds[] = {KC_X, KC_C, COMBO_END};
 const uint16_t PROGMEM c_mins[] = {KC_C, KC_V, COMBO_END};
-const uint16_t PROGMEM c_eql[] = {KC_D, KC_F, COMBO_END};
+const uint16_t PROGMEM c_eql[] = {KC_W, KC_E, COMBO_END};
 const uint16_t PROGMEM c_dquo[] = {KC_I, KC_O, COMBO_END};
 // const uint16_t PROGMEM c_mo3[] = {KC_A, KC_S, COMBO_END};
 // const uint16_t PROGMEM c_lgui[] = {KC_R, KC_T, COMBO_END};
@@ -35,9 +35,9 @@ const uint16_t PROGMEM c_dquo[] = {KC_I, KC_O, COMBO_END};
 combo_t key_combos[COMBO_COUNT] = {
    //  COMBO(c_esc, KC_ESC), //escape
    //  COMBO(c_ent, KC_ENT), //enter
-   //  COMBO(c_bspc, KC_BSPC), // backspace
-   //  COMBO(c_del, KC_DEL), //delete
-   //  COMBO(c_delwrd, LCTL(KC_BSPC)), //delete word
+    COMBO(c_bspc, KC_BSPC), // backspace
+    COMBO(c_del, KC_DEL), //delete
+    COMBO(c_delwrd, LCTL(KC_BSPC)), //delete word
     COMBO(c_tab, KC_TAB), // tab
     COMBO(c_unds, KC_UNDS), //underscore
     COMBO(c_mins, KC_MINS), //minus
@@ -95,7 +95,8 @@ layer 4, mouse
 #define LT1_BSP LT(1, KC_BSPC)
 #define LT1_ENT LT(1, KC_ENT)
 #define LT2_ESC LT(2, KC_ESC)
-#define LT3_KCE LT(3, KC_E)
+// #define LT3_KCE LT(3, KC_E)
+#define LT3_KCR LT(3, KC_R)
 #define LT4_KCT LT(4, KC_T)
 
 #define WVD_NXT LGUI(LCTL(KC_RGHT))
@@ -105,13 +106,13 @@ layer 4, mouse
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [0] = LAYOUT(
   //,-------------------------------------------.                    ,---------------------------------------------
-        KC_Q,    KC_W, LT3_KCE,    KC_R, LT4_KCT,                         KC_Y,    KC_U,    KC_I,    KC_O,   KC_P, 
+        KC_Q,    KC_W,    KC_E, LT3_KCR, LT4_KCT,                         KC_Y,    KC_U,    KC_I,    KC_O,   KC_P, 
   //|-------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+
      GUI_KCA, ALT_KCS, CTL_KCD, SFT_KCF,    KC_G,                         KC_H, SFT_KCJ, CTL_KCK, ALT_KCL, GUI_SCN,
   //|-------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+
         KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,                         KC_N,    KC_M, KC_COMM,  KC_DOT, KC_SLSH,
   //|-------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+
-                                         LT1_ENT, LT2_ESC,     KC_SPC,  LT1_BSP
+                                         LT1_ENT, LT2_ESC,     KC_SPC,    MO(1)
                                       //-----------------'  `------------------
   ),
 
@@ -141,7 +142,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [3] = LAYOUT(
   //,-------------------------------------------.                    ,---------------------------------------------
-     _______, _______, _______, KC_LALT, _______,                      _______, _______,  KC_TAB, _______, _______,
+     _______, _______, _______, _______, _______,                      _______, _______, _______, _______, _______,
   //|-------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+
      _______, _______, _______, _______, _______,                      KC_LEFT, KC_DOWN,   KC_UP, KC_RGHT, _______,
   //|-------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+

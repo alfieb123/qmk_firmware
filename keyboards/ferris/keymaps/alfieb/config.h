@@ -23,7 +23,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 // #define MASTER_LEFT
 
-#define COMBO_COUNT 5
+#define COMBO_COUNT 8
 #define COMBO_TERM 30 
 
 #define BOTH_SHIFTS_TURNS_ON_CAPS_WORD
