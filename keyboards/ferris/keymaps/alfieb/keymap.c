@@ -95,6 +95,7 @@ layer 4, mouse
 #define LT1_BSP LT(1, KC_BSPC)
 #define LT1_ENT LT(1, KC_ENT)
 #define LT2_ESC LT(2, KC_ESC)
+#define LT2_SPC LT(2, KC_SPC)
 // #define LT3_KCE LT(3, KC_E)
 #define LT3_KCR LT(3, KC_R)
 #define LT4_KCT LT(4, KC_T)
@@ -112,7 +113,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|-------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+
         KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,                         KC_N,    KC_M, KC_COMM,  KC_DOT, KC_SLSH,
   //|-------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+
-                                         LT1_ENT, LT2_ESC,     KC_SPC,    MO(1)
+                                         LT1_ENT, LT2_ESC,    LT2_SPC,    MO(1)
                                       //-----------------'  `------------------
   ),
 
