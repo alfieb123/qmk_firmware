@@ -103,6 +103,11 @@ layer 4, mouse
 #define WVD_NXT LGUI(LCTL(KC_RGHT))
 #define WVD_PRV LGUI(LCTL(KC_LEFT))
 
+// lgui lalt lsft, this has been put here specificlly for the the windows store app
+// 'Virtual Desktrop Indictor', that has number based switching desktops with win alt shift num, 
+// and switching windows to numbered virtual desktop with win alt shift Fnum (so, F2 instead of 2)
+#define GAS LGUI(LALT(KC_LSFT))
+
                                   
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [0] = LAYOUT(
@@ -137,7 +142,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|-------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+
        KC_F4,   KC_F3,   KC_F2,   KC_F1, WVD_PRV,                         KC_0,    KC_1,    KC_2,    KC_3, KC_PMNS,
   //|-------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+
-                                         _______, _______,    _______,   KC_DEL
+                                             GAS, _______,    _______,   KC_DEL
                                       //-----------------'  `------------------
   ),
 
