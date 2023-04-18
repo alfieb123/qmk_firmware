@@ -102,6 +102,7 @@ layer 4, mouse
 
 #define WVD_NXT LGUI(LCTL(KC_RGHT))
 #define WVD_PRV LGUI(LCTL(KC_LEFT))
+#define WNCLOSE LALT(KC_F4)
 
 // lgui lalt lsft, this has been put here specificlly for the the windows store app
 // 'Virtual Desktrop Indictor', that has number based switching desktops with win alt shift num, 
@@ -118,13 +119,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|-------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+
         KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,                         KC_N,    KC_M, KC_COMM,  KC_DOT, KC_SLSH,
   //|-------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+
-                                         LT1_ENT, LT2_ESC,    LT2_SPC,    MO(1)
+                                         LT1_ENT, LT2_ESC,    LT2_SPC,  LT1_BSP
                                       //-----------------'  `------------------
   ),
 
   [1] = LAYOUT(
   //,-------------------------------------------.                    ,---------------------------------------------
-     KC_EXLM, KC_DQUO, KC_LCBR, KC_RCBR, KC_PIPE,                      _______, KC_CIRC, KC_MINS, KC_QUOT, _______,
+     KC_EXLM, KC_DQUO, KC_LCBR, KC_RCBR, KC_PIPE,                      _______, KC_CIRC, KC_MINS, KC_QUOT, WNCLOSE,
   //|-------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+
      KC_NUHS,  KC_DLR, KC_LPRN, KC_RPRN,   SNUBS,                      _______,  KC_EQL, KC_UNDS,   KC_AT, KC_LGUI,
   //|-------+--------+--------+--------+--------j                    |--------+--------+--------+--------+--------+
@@ -136,7 +137,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [2] = LAYOUT(
   //,-------------------------------------------.                    ,---------------------------------------------
-      KC_F12,  KC_F11,  KC_F10,   KC_F9, _______,                       KC_EQL,    KC_7,    KC_8,    KC_9, KC_PAST,
+      KC_F12,  KC_F11,  KC_F10,   KC_F9,     GAS,                       KC_EQL,    KC_7,    KC_8,    KC_9, KC_PAST,
   //|-------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+
      GUI__F8, ALT__F7, CTL__F6, SFT__F5, WVD_NXT,                       KC_DOT, SFT_NU4, CTL_NU5, ALT_NU6, GUI_PLS,
   //|-------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+
@@ -164,7 +165,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|-------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+
      _______, _______, _______, _______, _______,                      KC_MS_L, KC_MS_D, KC_MS_U, KC_MS_R, _______,
   //|-------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+
-     _______, _______, _______, _______, _______,                      _______, KC_WH_D, KC_WH_U, _______, _______,
+     QK_BOOT, _______, _______, _______, _______,                      _______, KC_WH_D, KC_WH_U, _______, _______,
   //|-------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+
                                          _______, _______,    KC_BTN1, KC_BTN2
                                       //-----------------'  `------------------
