@@ -23,7 +23,7 @@ enum ferris_tap_dances {
 // const uint16_t PROGMEM c_ent[] = {KC_S, KC_D, COMBO_END};
 const uint16_t PROGMEM c_bspc[] = {KC_M, KC_COMM, COMBO_END};
 const uint16_t PROGMEM c_del[] = {KC_COMM, KC_DOT, COMBO_END};
-const uint16_t PROGMEM c_delwrd[] = {KC_N, KC_M, COMBO_END};
+// const uint16_t PROGMEM c_delwrd[] = {KC_N, KC_M, COMBO_END};
 const uint16_t PROGMEM c_tab[] = {KC_Q, KC_W, COMBO_END};
 const uint16_t PROGMEM c_unds[] = {KC_X, KC_C, COMBO_END};
 const uint16_t PROGMEM c_mins[] = {KC_C, KC_V, COMBO_END};
@@ -37,7 +37,7 @@ combo_t key_combos[COMBO_COUNT] = {
    //  COMBO(c_ent, KC_ENT), //enter
     COMBO(c_bspc, KC_BSPC), // backspace
     COMBO(c_del, KC_DEL), //delete
-    COMBO(c_delwrd, LCTL(KC_BSPC)), //delete word
+   //  COMBO(c_delwrd, LCTL(KC_BSPC)), //delete word
     COMBO(c_tab, KC_TAB), // tab
     COMBO(c_unds, KC_UNDS), //underscore
     COMBO(c_mins, KC_MINS), //minus
