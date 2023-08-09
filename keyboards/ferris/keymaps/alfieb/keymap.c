@@ -60,7 +60,7 @@ layer 4, mouse
 #define _______ KC_NO
 #define missing KC_NO
 
-#define SNUBS LSFT(KC_NUBS) 
+#define SNUBS LSFT(KC_NUBS)
 
 #define GUI_KCA LGUI_T(KC_A)
 #define ALT_KCS LALT_T(KC_S)
@@ -105,15 +105,15 @@ layer 4, mouse
 #define WNCLOSE LALT(KC_F4)
 
 // lgui lalt lsft, this has been put here specificlly for the the windows store app
-// 'Virtual Desktrop Indictor', that has number based switching desktops with win alt shift num, 
+// 'Virtual Desktrop Indictor', that has number based switching desktops with win alt shift num,
 // and switching windows to numbered virtual desktop with win alt shift Fnum (so, F2 instead of 2)
 #define GAS LGUI(LALT(KC_LSFT))
 
-                                  
+
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [0] = LAYOUT(
   //,-------------------------------------------.                    ,---------------------------------------------
-        KC_Q,    KC_W,    KC_E, LT3_KCR, LT4_KCT,                         KC_Y,    KC_U,    KC_I,    KC_O,   KC_P, 
+        KC_Q,    KC_W,    KC_E, LT3_KCR, LT4_KCT,                         KC_Y,    KC_U,    KC_I,    KC_O,   KC_P,
   //|-------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+
      GUI_KCA, ALT_KCS, CTL_KCD, SFT_KCF,    KC_G,                         KC_H, SFT_KCJ, CTL_KCK, ALT_KCL, GUI_SCN,
   //|-------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+
@@ -123,13 +123,27 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                       //-----------------'  `------------------
   ),
 
+// // linux and pc:
+//   [1] = LAYOUT(
+//   //,-------------------------------------------.                    ,---------------------------------------------
+//      KC_EXLM, KC_DQUO, KC_LCBR, KC_RCBR, KC_PIPE,                      _______, KC_CIRC, KC_MINS, KC_QUOT, _______,
+//   //|-------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+
+//      KC_NUHS,  KC_DLR, KC_LPRN, KC_RPRN,   SNUBS,                      _______,  KC_EQL, KC_UNDS,   KC_AT, KC_LGUI,
+//   //|-------+--------+--------+--------+--------j                    |--------+--------+--------+--------+--------+
+//      KC_PERC, KC_HASH, KC_LBRC, KC_RBRC, KC_AMPR,                      _______, KC_NUBS, _______, _______, _______,
+//   //|-------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+
+//                                          WNCLOSE, _______,    _______,  _______
+//                                       //-----------------'  `------------------
+//   ),
+
+// mac:
   [1] = LAYOUT(
   //,-------------------------------------------.                    ,---------------------------------------------
-     KC_EXLM, KC_DQUO, KC_LCBR, KC_RCBR, KC_PIPE,                      _______, KC_CIRC, KC_MINS, KC_QUOT, _______,
+     KC_EXLM,   KC_AT, KC_LCBR, KC_RCBR,KC_TILDE,                      _______, KC_CIRC, KC_MINS, KC_QUOT, _______,
   //|-------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+
-     KC_NUHS,  KC_DLR, KC_LPRN, KC_RPRN,   SNUBS,                      _______,  KC_EQL, KC_UNDS,   KC_AT, KC_LGUI,
+     KC_HASH,  KC_DLR, KC_LPRN, KC_RPRN, KC_PIPE,                      _______,  KC_EQL, KC_UNDS, KC_DQUO, KC_LGUI,
   //|-------+--------+--------+--------+--------j                    |--------+--------+--------+--------+--------+
-     KC_PERC, KC_HASH, KC_LBRC, KC_RBRC, KC_AMPR,                      _______, KC_NUBS, _______, _______, _______,
+     KC_PERC, KC_HASH, KC_LBRC, KC_RBRC, KC_AMPR,                      _______, KC_BSLS, _______, _______, _______,
   //|-------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+
                                          WNCLOSE, _______,    _______,  _______
                                       //-----------------'  `------------------
@@ -185,21 +199,21 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 };
 
 // const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-//   [_QWERTY] = LAYOUT( 
+//   [_QWERTY] = LAYOUT(
 //     KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,            KC_Y,    KC_U,  KC_I,    KC_O,   KC_P,
 //     KC_CTLA, KC_S,    KC_D,    KC_F,    KC_G,            KC_H,    KC_J,  KC_K,    KC_L,   KC_SCLN,
 //     KC_LSHZ, KC_X,    KC_C,    KC_V,    KC_B,            KC_N,    KC_M,  KC_COMM, KC_DOT, KC_RLSH,
 //                                     KC_CLGV, KC_BSM1, KC_SPM2, KC_GUTA
 //   ),
 //
-//   [_LOWER] = LAYOUT( 
+//   [_LOWER] = LAYOUT(
 //     KC_1,    KC_2,    KC_3,    KC_4,    KC_5,            KC_6,    KC_7,    KC_8,    KC_9,    KC_0,
 //     QK_GESC, KC_HOME, KC_PGDN, KC_PGUP, KC_END,          KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, KC_QUOT,
 //     KC_TRNS, KC_TRNS, KC_TRNS, KC_BTN1, KC_BTN2,         KC_MS_L, KC_MS_D, KC_MS_U, KC_MS_R, KC_ENT,
-//                                     KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS  
+//                                     KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS
 //   ),
 //
-//   [_RAISE] = LAYOUT( 
+//   [_RAISE] = LAYOUT(
 //     KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,           KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,
 //     KC_TAB,  KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,         KC_MINS, KC_EQL,  KC_LBRC, KC_RBRC, KC_PIPE,
 //     KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,         KC_UNDS, KC_PLUS, KC_TRNS, KC_TRNS, QK_BOOT,
