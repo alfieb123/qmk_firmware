@@ -108,6 +108,9 @@ layer 4, mouse
 #define MVD_NXT LCTL(KC_RGHT)
 #define MVD_PRV LCTL(KC_LEFT)
 
+// define the mac version of has which is alt+3... wierdly
+#define MAC_HSH LALT(KC_3)
+
 // windows virtual desktops
 #define WVD_NXT LGUI(LCTL(KC_RGHT))
 #define WVD_PRV LGUI(LCTL(KC_LEFT))
@@ -150,7 +153,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //,-------------------------------------------.                    ,---------------------------------------------
      KC_EXLM,   KC_AT, KC_LCBR, KC_RCBR,KC_TILDE,                      _______, KC_CIRC, KC_MINS, KC_QUOT, _______,
   //|-------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+
-     KC_HASH,  KC_DLR, KC_LPRN, KC_RPRN, KC_PIPE,                      KC_LGUI,  KC_EQL, KC_UNDS, KC_DQUO, KC_LGUI,
+     MAC_HSH,  KC_DLR, KC_LPRN, KC_RPRN, KC_PIPE,                      KC_LGUI,  KC_EQL, KC_UNDS, KC_DQUO, KC_LGUI,
   //|-------+--------+--------+--------+--------j                    |--------+--------+--------+--------+--------+
      KC_PERC, KC_HASH, KC_LBRC, KC_RBRC, KC_AMPR,                      _______, KC_BSLS, _______, _______, _______,
   //|-------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+

@@ -25,3 +25,6 @@ RGB_MATRIX_DRIVER = WS2812  # RGB matrix driver support
 
 SPLIT_KEYBOARD = yes
 LAYOUTS = split_3x6_3
+
+COMBO_ENABLE = yes          # allow combos
+CAPS_WORD_ENABLE = yes      # allow caps word 
