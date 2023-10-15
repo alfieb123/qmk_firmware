@@ -32,7 +32,7 @@
 // define the mac version of has which is alt+3... wierdly
 #define MAC_HSH LALT(KC_3)
 #define DEL_WRD LALT(KC_BSPC)
-#define SFT_CWD LSFT(QK_CAPS_WORD_TOGGLE)
+#define SFT_CWD LSFT_T(CW_TOGG)
 
 // home row mods
 #define ALT_KCS LALT_T(KC_S)
@@ -82,7 +82,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   _______,    KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,        KC_Y,    KC_U,    KC_I,    KC_O,    KC_P, _______,
   _______,    KC_A, ALT_KCS, CTL_KCD, SFT_KCF, GUI_KCG,     GUI_KCH, SFT_KCJ, CTL_KCK, ALT_KCL, KC_SCLN, _______,
   _______,    KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,        KC_N,    KC_M, KC_COMM,  KC_DOT, KC_SLSH, _______,
-                             LT1_ENT, LT2_ESC, SFT_CWD,     KC_LSFT, LT2_SPC, LT1_BSP,
+                             LT1_ENT, LT2_ESC, CW_TOGG,     KC_LSFT, LT2_SPC, LT1_BSP,
                                       LT3_LBR, LT4_HME,     LT4_END, LT3_RBR
   ),
 
