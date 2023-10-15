@@ -46,28 +46,30 @@
 #define GUI_KCH LGUI_T(KC_H)
 
 enum custom_keycodes {
-    QMKBEST = SAFE_RANGE,
+    // QMKBEST = SAFE_RANGE,
     CPP_PTR = SAFE_RANGE,
 };
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
-    case QMKBEST:
-        if (record->event.pressed) {
-            // when keycode QMKBEST is pressed
-            SEND_STRING("QMK is the best thing ever!");
-        } else {
-            // when keycode QMKBEST is released
-        }
-        break;
+    // case QMKBEST:
+    //     if (record->event.pressed) {
+    //         // when keycode QMKBEST is pressed
+    //         SEND_STRING("QMK is the best thing ever!");
+    //     } else {
+    //         // when keycode QMKBEST is released
+    //     }
+    //     break;
+
     case CPP_PTR:
         if (record->event.pressed) {
-            // when keycode QMKBEST is pressed
+            // when keycode QMKURL is pressed
             SEND_STRING("->");
         } else {
-            // when keycode QMKBEST is released
+            // when keycode QMKURL is released
         }
         break;
+
     }
     return true;
 };

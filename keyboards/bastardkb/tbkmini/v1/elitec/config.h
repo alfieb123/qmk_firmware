@@ -37,3 +37,7 @@
 #define COMBO_TERM 30 
 
 #define BOTH_SHIFTS_TURNS_ON_CAPS_WORD
+
+// Pick good defaults for enabling homerow modifiers
+#define TAPPING_TERM 180
+#define IGNORE_MOD_TAP_INTERRUPT

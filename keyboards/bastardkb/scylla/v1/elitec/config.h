@@ -32,3 +32,7 @@
 
 /* RGB settings. */
 #define RGB_DI_PIN D2
+
+// Pick good defaults for enabling homerow modifiers
+#define TAPPING_TERM 180
+#define IGNORE_MOD_TAP_INTERRUPT

@@ -22,12 +22,16 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 /* Select hand configuration */
 // #define MASTER_LEFT
-// #define MASTER_RIGHT
-#define EE_HANDS
+#define MASTER_RIGHT
+// #define EE_HANDS
 
 #define TAPPING_FORCE_HOLD
-#define TAPPING_TERM 300
-#define PERMISSIVE_HOLD
-#define IGNORE_MOD_TAP_INTERRUPT
+// #define TAPPING_TERM 300
+// #define PERMISSIVE_HOLD
+// #define IGNORE_MOD_TAP_INTERRUPT
 #define LEADER_PER_KEY_TIMING
-#define LEADER_TIMEOUT 300
+// #define LEADER_TIMEOUT 300
+
+// Pick good defaults for enabling homerow modifiers
+#define TAPPING_TERM 180
+#define IGNORE_MOD_TAP_INTERRUPT
