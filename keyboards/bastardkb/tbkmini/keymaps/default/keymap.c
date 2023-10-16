@@ -116,6 +116,8 @@ combo_t key_combos[COMBO_COUNT] = {
     COMBO(c_dquo, KC_DQUO), // double quote
 };
 
+//TODO : implement some tap dance functions for stuff like the left and right bracket.. trying top take stuff off the pinky!
+
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [0] = LAYOUT_split_3x6_3(
