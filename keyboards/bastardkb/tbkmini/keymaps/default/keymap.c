@@ -17,23 +17,6 @@
 
 #include QMK_KEYBOARD_H
 
-const uint16_t PROGMEM c_bspc[] = {KC_M, KC_COMM, COMBO_END};
-const uint16_t PROGMEM c_del[] = {KC_COMM, KC_DOT, COMBO_END};
-const uint16_t PROGMEM c_tab[] = {KC_Q, KC_W, COMBO_END};
-const uint16_t PROGMEM c_unds[] = {KC_X, KC_C, COMBO_END};
-const uint16_t PROGMEM c_mins[] = {KC_C, KC_V, COMBO_END};
-const uint16_t PROGMEM c_eql[] = {KC_W, KC_E, COMBO_END};
-const uint16_t PROGMEM c_dquo[] = {KC_I, KC_O, COMBO_END};
-
-combo_t key_combos[COMBO_COUNT] = {
-    COMBO(c_bspc, KC_BSPC), // backspace
-    COMBO(c_del, KC_DEL), //delete
-    COMBO(c_tab, KC_TAB), // tab
-    COMBO(c_unds, KC_UNDS), //underscore
-    COMBO(c_mins, KC_MINS), //minus
-    COMBO(c_eql, KC_EQL), //equal
-    COMBO(c_dquo, KC_DQUO),
-};
 
 /*
 base layer, home row mods
@@ -92,28 +75,68 @@ layer 4, mouse
 #define WVD_PRV LGUI(LCTL(KC_LEFT))
 #define WNCLOSE LALT(KC_F4)
 
+enum custom_keycodes {
+    CPP_PTR = SAFE_RANGE,
+};
+
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+    switch (keycode) {
+    case CPP_PTR:
+        if (record->event.pressed) {
+            // when keycode CPP_PTR is pressed
+            SEND_STRING("->");
+        } else {
+            // when keycode CPP_PTR is released
+        }
+        break;
+
+    }
+    return true;
+};
+
+const uint16_t PROGMEM c_bspc[] = {KC_M, KC_COMM, COMBO_END};
+const uint16_t PROGMEM c_del[] = {KC_COMM, KC_DOT, COMBO_END};
+const uint16_t PROGMEM c_tab[] = {KC_Q, KC_W, COMBO_END};
+const uint16_t PROGMEM c_unds[] = {KC_X, KC_C, COMBO_END};
+const uint16_t PROGMEM c_mins[] = {KC_C, KC_V, COMBO_END};
+const uint16_t PROGMEM c_plus[] = {KC_V, KC_B, COMBO_END};
+const uint16_t PROGMEM c_mult[] = {KC_R, KC_T, COMBO_END};
+const uint16_t PROGMEM c_eql[] = {KC_W, KC_E, COMBO_END};
+const uint16_t PROGMEM c_dquo[] = {KC_I, KC_O, COMBO_END};
+
+combo_t key_combos[COMBO_COUNT] = {
+    COMBO(c_bspc, KC_BSPC), // backspace
+    COMBO(c_del, KC_DEL), //delete
+    COMBO(c_tab, KC_TAB), // tab
+    COMBO(c_unds, KC_UNDS), //underscore
+    COMBO(c_mins, KC_MINS), //minus
+    COMBO(c_plus, KC_PPLS), //plus
+    COMBO(c_mult, KC_PAST), //mult *
+    COMBO(c_eql, KC_EQL), //equal
+    COMBO(c_dquo, KC_DQUO), // double quote
+};
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [0] = LAYOUT_split_3x6_3(
         //,-----------------------------------------------------.                    ,-----------------------------------------------------.
-            _______,   KC_Q,    KC_W,    KC_E, LT3_KCR,  LT4_KCT,                         KC_Y,   KC_U,    KC_I,    KC_O,    KC_P,  _______,
+             KC_TAB,   KC_Q,    KC_W,    KC_E, LT3_KCR,  LT4_KCT,                         KC_Y,   KC_U,    KC_I,    KC_O,    KC_P,  KC_BSPC,
         //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-            _______,   KC_A,  ALT_KCS, CTL_KCD, SFT_KCF, GUI_KCG,                      GUI_KCH, SFT_KCJ, CTL_KCK, ALT_KCL, KC_SCLN, _______,
+            KC_LBRC,   KC_A,  ALT_KCS, CTL_KCD, SFT_KCF, GUI_KCG,                      GUI_KCH, SFT_KCJ, CTL_KCK, ALT_KCL, KC_SCLN, KC_RBRC,
         //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-            _______,   KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,                        KC_N,   KC_M,  KC_COMM,  KC_DOT, KC_SLSH, _______,
+            _______,   KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,                          KC_N,   KC_M,  KC_COMM,  KC_DOT, KC_SLSH, _______,
         //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                               LT1_ENT,  LT2_ESC, _______,    _______,  LT2_SPC, LT1_BSP
+                                               LT1_ENT,  LT2_ESC, CW_TOGG,    _______,  LT2_SPC, LT1_BSP
                                             //`--------------------------'  `--------------------------'
 
         ),
     [1] = LAYOUT_split_3x6_3(
         //,-----------------------------------------------------.                    ,-----------------------------------------------------.
-            _______, KC_EXLM,   KC_AT, KC_LCBR, KC_RCBR,KC_TILDE,                      _______, KC_CIRC, KC_MINS, KC_QUOT, _______,  _______,
+            _______, KC_EXLM,   KC_AT, KC_LCBR, KC_RCBR,KC_TILDE,                      CPP_PTR, KC_CIRC, KC_MINS, KC_QUOT, _______,  _______,
         //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-            _______, MAC_HSH,  KC_DLR, KC_LPRN, KC_RPRN, KC_PIPE,                      KC_LGUI,  KC_EQL, KC_UNDS, KC_DQUO, KC_LGUI, _______,
+            _______, MAC_HSH,  KC_DLR, KC_LPRN, KC_RPRN, KC_PIPE,                       KC_GRV,  KC_EQL, KC_UNDS, KC_DQUO,  KC_INS, _______,
         //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-            _______, KC_PERC, KC_HASH, KC_LBRC, KC_RBRC, KC_AMPR,                      _______, KC_BSLS, _______, _______, _______, _______,
+            _______, KC_PERC, KC_HASH, KC_LBRC, KC_RBRC, KC_AMPR,                      _______, KC_BSLS, KC_HOME,  KC_END, _______, _______,
         //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
                                                 _______, _______, _______,    _______, _______, _______
                                             //`--------------------------'  `--------------------------'
@@ -133,7 +156,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         ),
     [3] = LAYOUT_split_3x6_3(
         //,-----------------------------------------------------.                    ,-----------------------------------------------------.
-            _______, _______, _______, _______, _______, _______,                      _______, _______, _______, _______, _______, _______,
+            _______, _______, _______, _______, _______, _______,                      _______, KC_PGDN, KC_PGUP, _______, _______, _______,
         //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
             _______, _______, _______, _______, _______, _______,                      KC_LEFT, KC_DOWN,   KC_UP, KC_RGHT, _______, _______,
         //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
