@@ -27,8 +27,6 @@ layer 4, mouse
 */
 
 #define _______ KC_NO
-#define XXXX KC_NO
-#define missing KC_NO
 
 #define SNUBS LSFT(KC_NUBS)
 
@@ -97,8 +95,8 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 const uint16_t PROGMEM c_bspc[] = {KC_M, KC_COMM, COMBO_END};
 const uint16_t PROGMEM c_del[] = {KC_COMM, KC_DOT, COMBO_END};
 const uint16_t PROGMEM c_tab[] = {KC_Q, KC_W, COMBO_END};
-const uint16_t PROGMEM c_unds[] = {KC_X, KC_C, COMBO_END};
-const uint16_t PROGMEM c_mins[] = {KC_C, KC_V, COMBO_END};
+const uint16_t PROGMEM c_unds[] = {KC_C, KC_V, COMBO_END};
+const uint16_t PROGMEM c_mins[] = {KC_X, KC_C, COMBO_END};
 const uint16_t PROGMEM c_plus[] = {KC_V, KC_B, COMBO_END};
 const uint16_t PROGMEM c_mult[] = {KC_R, KC_T, COMBO_END};
 const uint16_t PROGMEM c_eql[] = {KC_W, KC_E, COMBO_END};
@@ -126,9 +124,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
             KC_LBRC,   KC_A,  ALT_KCS, CTL_KCD, SFT_KCF, GUI_KCG,                      GUI_KCH, SFT_KCJ, CTL_KCK, ALT_KCL, KC_SCLN, KC_RBRC,
         //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-            _______,   KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,                          KC_N,   KC_M,  KC_COMM,  KC_DOT, KC_SLSH, _______,
+            CW_TOGG,   KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,                          KC_N,   KC_M,  KC_COMM,  KC_DOT, KC_SLSH,  KC_DEL,
         //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                               LT1_ENT,  LT2_ESC, CW_TOGG,    _______,  LT2_SPC, LT1_BSP
+                                               LT1_ENT,  LT2_ESC, _______,    _______,  LT2_SPC, LT1_BSP
                                             //`--------------------------'  `--------------------------'
 
         ),
