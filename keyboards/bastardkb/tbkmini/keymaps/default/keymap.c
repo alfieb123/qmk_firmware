@@ -67,6 +67,8 @@ layer 4, mouse
 
 // define the mac version of has which is alt+3... wierdly
 #define MAC_HSH LALT(KC_3)
+// to switch between windows of the same app in mac, its cmd + `
+#define CMD_GRV LGUI(KC_GRV)
 
 // windows virtual desktops
 #define WVD_NXT LGUI(LCTL(KC_RGHT))
@@ -92,6 +94,8 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     return true;
 };
 
+// NOTE! changed the unds to mins in the array below so that all combos are - so i can 
+// learn to use the thumb for _!!
 const uint16_t PROGMEM c_bspc[] = {KC_M, KC_COMM, COMBO_END};
 const uint16_t PROGMEM c_del[] = {KC_COMM, KC_DOT, COMBO_END};
 const uint16_t PROGMEM c_tab[] = {KC_Q, KC_W, COMBO_END};
@@ -106,8 +110,11 @@ combo_t key_combos[COMBO_COUNT] = {
     COMBO(c_bspc, KC_BSPC), // backspace
     COMBO(c_del, KC_DEL), //delete
     COMBO(c_tab, KC_TAB), // tab
-    COMBO(c_unds, KC_UNDS), //underscore
-    COMBO(c_mins, KC_MINS), //minus
+
+    // COMBO(c_unds, KC_UNDS), //underscore // NOTE this is the one i changed!
+    COMBO(c_unds, KC_MINS), //underscore
+
+    COMBO(c_mins, KC_MINS), //minus 
     COMBO(c_plus, KC_PPLS), //plus
     COMBO(c_mult, KC_PAST), //mult *
     COMBO(c_eql, KC_EQL), //equal
@@ -124,15 +131,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
             KC_LBRC,   KC_A,  ALT_KCS, CTL_KCD, SFT_KCF, GUI_KCG,                      GUI_KCH, SFT_KCJ, CTL_KCK, ALT_KCL, KC_SCLN, KC_RBRC,
         //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-            CW_TOGG,   KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,                          KC_N,   KC_M,  KC_COMM,  KC_DOT, KC_SLSH,  KC_DEL,
+            CMD_GRV,   KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,                          KC_N,   KC_M,  KC_COMM,  KC_DOT, KC_SLSH,  KC_DEL,
         //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                               LT1_ENT,  LT2_ESC, _______,    _______,  LT2_SPC, LT1_BSP
+                                               LT1_ENT,  LT2_ESC, CW_TOGG,    KC_UNDS,  LT2_SPC, LT1_BSP
                                             //`--------------------------'  `--------------------------'
 
         ),
     [1] = LAYOUT_split_3x6_3(
         //,-----------------------------------------------------.                    ,-----------------------------------------------------.
-            _______, KC_EXLM,   KC_AT, KC_LCBR, KC_RCBR,KC_TILDE,                      CPP_PTR, KC_CIRC, KC_MINS, KC_QUOT, _______,  _______,
+            CMD_GRV, KC_EXLM,   KC_AT, KC_LCBR, KC_RCBR,KC_TILDE,                      CPP_PTR, KC_CIRC, KC_MINS, KC_QUOT, _______,  _______,
         //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
             _______, MAC_HSH,  KC_DLR, KC_LPRN, KC_RPRN, KC_PIPE,                       KC_GRV,  KC_EQL, KC_UNDS, KC_DQUO,  KC_INS, _______,
         //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
@@ -144,7 +151,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         ),
     [2] = LAYOUT_split_3x6_3(
         //,-----------------------------------------------------.                    ,-----------------------------------------------------.
-            _______,  KC_F12,  KC_F11,  KC_F10,   KC_F9, MVD_NXT,                       KC_EQL,    KC_7,    KC_8,    KC_9, KC_PAST, _______,
+            CMD_GRV,  KC_F12,  KC_F11,  KC_F10,   KC_F9, MVD_NXT,                       KC_EQL,    KC_7,    KC_8,    KC_9, KC_PAST, _______,
         //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
             _______,   KC_F8, ALT__F7, CTL__F6, SFT__F5, KC_LGUI,                      GUI_DOT, SFT_NU4, CTL_NU5, ALT_NU6, KC_PPLS, _______,
         //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
