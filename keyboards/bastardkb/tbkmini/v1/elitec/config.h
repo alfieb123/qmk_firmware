@@ -33,8 +33,8 @@
 /* RGB settings. */
 #define RGB_DI_PIN D2
 
-#define COMBO_COUNT 9
-#define COMBO_TERM 30 
+#define COMBO_COUNT 5
+#define COMBO_TERM 30
 
 #define BOTH_SHIFTS_TURNS_ON_CAPS_WORD
 

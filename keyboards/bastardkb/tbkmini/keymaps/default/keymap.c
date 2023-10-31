@@ -32,21 +32,23 @@ layer 4, mouse
 
 #define GUI_KCA LGUI_T(KC_A)
 #define ALT_KCS LALT_T(KC_S)
+#define ALTRKCX RALT_T(KC_X)
 #define CTL_KCD LCTL_T(KC_D)
 #define SFT_KCF LSFT_T(KC_F)
 #define GUI_KCG LGUI_T(KC_G)
 
 #define GUI_SCN LGUI_T(KC_SCLN)
-#define ALT_KCL LALT_T(KC_L)
 #define CTL_KCK LCTL_T(KC_K)
 #define SFT_KCJ RSFT_T(KC_J)
 #define GUI_KCH LGUI_T(KC_H)
+#define ALT_KCL LALT_T(KC_L)
+#define ALTRDOT RALT_T(KC_DOT)
 
 #define GUI_PLS LGUI_T(KC_PPLS)
+#define GUI_DOT LGUI_T(KC_DOT)
 #define ALT_NU6 LALT_T(KC_6)
 #define CTL_NU5 LCTL_T(KC_5)
-#define SFT_NU4 LSFT_T(KC_4)
-#define GUI_DOT LGUI_T(KC_DOT)
+#define SFT_NU4 LCTL_T(KC_4)
 
 #define GUI__F8 LGUI_T(KC_F8)
 #define ALT__F7 LALT_T(KC_F7)
@@ -67,6 +69,7 @@ layer 4, mouse
 
 // define the mac version of has which is alt+3... wierdly
 #define MAC_HSH LALT(KC_3)
+
 // to switch between windows of the same app in mac, its cmd + `
 #define CMD_GRV LGUI(KC_GRV)
 
@@ -96,23 +99,24 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
 // NOTE! changed the unds to mins in the array below so that all combos are - so i can 
 // learn to use the thumb for _!!
-const uint16_t PROGMEM c_bspc[] = {KC_M, KC_COMM, COMBO_END};
-const uint16_t PROGMEM c_del[] = {KC_COMM, KC_DOT, COMBO_END};
-const uint16_t PROGMEM c_tab[] = {KC_Q, KC_W, COMBO_END};
-const uint16_t PROGMEM c_unds[] = {KC_C, KC_V, COMBO_END};
-const uint16_t PROGMEM c_mins[] = {KC_X, KC_C, COMBO_END};
+// const uint16_t PROGMEM c_bspc[] = {KC_M, KC_COMM, COMBO_END};
+// const uint16_t PROGMEM c_del[] = {KC_COMM, KC_DOT, COMBO_END};
+// const uint16_t PROGMEM c_tab[] = {KC_Q, KC_W, COMBO_END};
+const uint16_t PROGMEM c_mins[] = {KC_C, KC_V, COMBO_END};
+// const uint16_t PROGMEM c_mins[] = {KC_X, KC_C, COMBO_END};
 const uint16_t PROGMEM c_plus[] = {KC_V, KC_B, COMBO_END};
 const uint16_t PROGMEM c_mult[] = {KC_R, KC_T, COMBO_END};
 const uint16_t PROGMEM c_eql[] = {KC_W, KC_E, COMBO_END};
 const uint16_t PROGMEM c_dquo[] = {KC_I, KC_O, COMBO_END};
 
-combo_t key_combos[COMBO_COUNT] = {
-    COMBO(c_bspc, KC_BSPC), // backspace
-    COMBO(c_del, KC_DEL), //delete
-    COMBO(c_tab, KC_TAB), // tab
 
-    // COMBO(c_unds, KC_UNDS), //underscore // NOTE this is the one i changed!
-    COMBO(c_unds, KC_MINS), //underscore
+combo_t key_combos[COMBO_COUNT] = {
+    // COMBO(c_bspc, KC_BSPC), // backspace
+    // COMBO(c_del, KC_DEL), //delete
+    // COMBO(c_tab, KC_TAB), // tab
+
+    // RLT_TOG(c_unds, KC_UNDS), //underscore // NOTE this is the one i changed!
+    // COMBO(c_mins, KC_MINS), //underscore
 
     COMBO(c_mins, KC_MINS), //minus 
     COMBO(c_plus, KC_PPLS), //plus
@@ -127,13 +131,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [0] = LAYOUT_split_3x6_3(
         //,-----------------------------------------------------.                    ,-----------------------------------------------------.
-             KC_TAB,   KC_Q,    KC_W,    KC_E, LT3_KCR,  LT4_KCT,                         KC_Y,   KC_U,    KC_I,    KC_O,    KC_P,  KC_BSPC,
+             KC_TAB,    KC_Q,    KC_W,    KC_E, LT3_KCR,  LT4_KCT,                         KC_Y,   KC_U,    KC_I,    KC_O,    KC_P, KC_BSPC,
         //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
             KC_LBRC,   KC_A,  ALT_KCS, CTL_KCD, SFT_KCF, GUI_KCG,                      GUI_KCH, SFT_KCJ, CTL_KCK, ALT_KCL, KC_SCLN, KC_RBRC,
         //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-            CMD_GRV,   KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,                          KC_N,   KC_M,  KC_COMM,  KC_DOT, KC_SLSH,  KC_DEL,
+            CMD_GRV,   KC_Z,  ALTRKCX,    KC_C,    KC_V,    KC_B,                          KC_N,   KC_M,  KC_COMM,ALTRDOT, KC_SLSH,  KC_DEL,
         //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                               LT1_ENT,  LT2_ESC, CW_TOGG,    KC_UNDS,  LT2_SPC, LT1_BSP
+                                               LT1_ENT,  LT2_ESC, CW_TOGG,    KC_UNDS, LT2_SPC, LT1_BSP
                                             //`--------------------------'  `--------------------------'
 
         ),
@@ -146,7 +150,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
             _______, KC_PERC, KC_HASH, KC_LBRC, KC_RBRC, KC_AMPR,                      _______, KC_BSLS, KC_HOME,  KC_END, _______, _______,
         //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
                                                 _______, _______, _______,    _______, _______, _______
-                                            //`--------------------------'  `--------------------------'
+                                           //`--------------------------'  `--------------------------'
 
         ),
     [2] = LAYOUT_split_3x6_3(
