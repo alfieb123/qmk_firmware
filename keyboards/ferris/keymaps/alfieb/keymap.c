@@ -21,11 +21,12 @@ enum ferris_tap_dances {
 
 // const uint16_t PROGMEM c_esc[] = {KC_W, KC_E, COMBO_END};
 // const uint16_t PROGMEM c_ent[] = {KC_S, KC_D, COMBO_END};
-const uint16_t PROGMEM c_bspc[] = {KC_M, KC_COMM, COMBO_END};
-const uint16_t PROGMEM c_del[] = {KC_COMM, KC_DOT, COMBO_END};
+// const uint16_t PROGMEM c_bspc[] = {KC_M, KC_COMM, COMBO_END};
+const uint16_t PROGMEM c_bspc[] = {KC_O, KC_P, COMBO_END};
+// const uint16_t PROGMEM c_del[] = {KC_COMM, KC_DOT, COMBO_END};
 // const uint16_t PROGMEM c_delwrd[] = {KC_N, KC_M, COMBO_END};
 const uint16_t PROGMEM c_tab[] = {KC_Q, KC_W, COMBO_END};
-const uint16_t PROGMEM c_unds[] = {KC_X, KC_C, COMBO_END};
+// const uint16_t PROGMEM c_unds[] = {KC_X, KC_C, COMBO_END};
 const uint16_t PROGMEM c_mins[] = {KC_C, KC_V, COMBO_END};
 const uint16_t PROGMEM c_eql[] = {KC_W, KC_E, COMBO_END};
 const uint16_t PROGMEM c_dquo[] = {KC_I, KC_O, COMBO_END};
@@ -36,12 +37,12 @@ combo_t key_combos[COMBO_COUNT] = {
    //  COMBO(c_esc, KC_ESC), //escape
    //  COMBO(c_ent, KC_ENT), //enter
     COMBO(c_bspc, KC_BSPC), // backspace
-    COMBO(c_del, KC_DEL), //delete
+    // COMBO(c_del, KC_DEL), //delete
    //  COMBO(c_delwrd, LCTL(KC_BSPC)), //delete word
     COMBO(c_tab, KC_TAB), // tab
-    COMBO(c_unds, KC_UNDS), //underscore
+    // COMBO(c_unds, KC_UNDS), //underscore
     COMBO(c_mins, KC_MINS), //minus
-    COMBO(c_eql, KC_EQL), //equal
+    COMBO(c_eql, KC_EQL), //equal 
     //COMBO(c_dquo, KC_AT), // this is a double quote ". notice we are using kc_at which is noramlly the at symbol but not on uk for some reason. ONLY windows and linux!
     COMBO(c_dquo, KC_DQUO),
    //  COMBO(c_mo3, MO(3)), // layer toggle to layer
@@ -49,6 +50,83 @@ combo_t key_combos[COMBO_COUNT] = {
    //  COMBO(c_lgui2, KC_LGUI), // Os key
     // COMBO(combo2, LCTL(KC_Z)), // keycodes with modifiers are possible too!
 };
+
+
+enum custom_keycodes {
+    CPP_PTR = SAFE_RANGE,
+    LT1_UND,
+};
+
+
+static uint16_t key_timer;
+
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+    switch (keycode) {
+        case CPP_PTR:
+            if (record->event.pressed) {
+                // when keycode CPP_PTR is pressed
+                SEND_STRING("->");
+            }
+            return false; // Skip all further processing of this key
+
+        case LT1_UND:
+            if (record->event.pressed) {
+                // Key has been pressed, start the timer
+                key_timer = timer_read();
+                layer_on(1); // Activate layer 1
+            } else {
+                // Key has been released, check the timer
+                if (timer_elapsed(key_timer) < TAPPING_TERM) {
+                    // Tapping term defines the time for a tap, if less, it's a tap
+                    tap_code16(KC_UNDS); // Send the underscore keycode
+                }
+                layer_off(1); // Deactivate layer 1 regardless of whether it was a tap or hold
+            }
+            return false; // Skip all further processing of this key
+
+        default:
+            return true; // Process all other keycodes normally
+    }
+};
+
+// bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+//     switch (keycode) {
+//     case CPP_PTR:
+//         if (record->event.pressed) {
+//             // when keycode CPP_PTR is pressed
+//             SEND_STRING("->");
+//         } else {
+//             // when keycode CPP_PTR is released
+//         }
+//         break;
+
+//     }
+//    default:
+//     return true;
+// };
+
+
+// customise caps word
+bool caps_word_press_user(uint16_t keycode) {
+    switch (keycode) {
+        // Keycodes that continue Caps Word, with shift applied.
+        case KC_A ... KC_Z:
+        case KC_MINS:
+            add_weak_mods(MOD_BIT(KC_LSFT));  // Apply shift to next key.
+            return true;
+
+        // Keycodes that continue Caps Word, without shifting.
+        case KC_1 ... KC_0:
+        case KC_BSPC:
+        case KC_DEL:
+        case KC_UNDS:
+        case KC_SPC: 
+            return true;
+
+        default:
+            return false;  // Deactivate Caps Word.
+    }
+}
 
 /*
 base layer, home row mods
@@ -65,12 +143,14 @@ layer 4, mouse
 
 #define GUI_KCA LGUI_T(KC_A)
 #define ALT_KCS LALT_T(KC_S)
+#define ALTRKCX RALT_T(KC_X)
 #define CTL_KCD LCTL_T(KC_D)
 #define SFT_KCF LSFT_T(KC_F)
 #define GUI_KCG LGUI_T(KC_G)
 
 #define GUI_SCN LGUI_T(KC_SCLN)
 #define ALT_KCL LALT_T(KC_L)
+#define ALTRDOT RALT_T(KC_DOT)
 #define CTL_KCK LCTL_T(KC_K)
 #define SFT_KCJ RSFT_T(KC_J)
 #define GUI_KCH LGUI_T(KC_H)
@@ -80,7 +160,7 @@ layer 4, mouse
 // #define CTL_LPR LCTL_T(KC_LPRN)
 // #define SFT_RPR LSFT_T(KC_RPRN)
 
-// #define ALT__AT LALT_T(KC_AT)
+#define ALT__AT LALT_T(KC_AT)
 // #define CTL_UND LCTL_T(KC_UNDS)
 // #define SFT_EQL LSFT_T(KC_EQL)
 
@@ -96,6 +176,9 @@ layer 4, mouse
 #define CTL__F6 LCTL_T(KC_F6)
 #define SFT__F5 LSFT_T(KC_F5)
 
+// #define LT1_UND KC_UNDS
+// #define LT1_UND LT(1, KC_UNDS)
+// #define LT1_UND LT(1, LSFT(KC_MINS))
 #define LT1_BSP LT(1, KC_BSPC)
 #define LT1_ENT LT(1, KC_ENT)
 #define LT2_ESC LT(2, KC_ESC)
@@ -105,16 +188,20 @@ layer 4, mouse
 #define LT4_KCT LT(4, KC_T)
 
 // mac virtual desktops
+
 #define MVD_NXT LCTL(KC_RGHT)
 #define MVD_PRV LCTL(KC_LEFT)
 
 // define the mac version of has which is alt+3... wierdly
 #define MAC_HSH LALT(KC_3)
 
+// to switch between windows of the same app in mac, its cmd + `
+#define CMD_GRV LGUI(KC_GRV)
+
 // windows virtual desktops
 #define WVD_NXT LGUI(LCTL(KC_RGHT))
 #define WVD_PRV LGUI(LCTL(KC_LEFT))
-#define WNCLOSE LALT(KC_F4)
+// #define WNCLOSE LALT(KC_F4)
 
 // lgui lalt lsft, this has been put here specificlly for the the windows store app
 // 'Virtual Desktrop Indictor', that has number based switching desktops with win alt shift num,
@@ -129,9 +216,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|-------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+
         KC_A, ALT_KCS, CTL_KCD, SFT_KCF, GUI_KCG,                      GUI_KCH, SFT_KCJ, CTL_KCK, ALT_KCL, KC_SCLN,
   //|-------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+
-        KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,                         KC_N,    KC_M, KC_COMM,  KC_DOT, KC_SLSH,
+        KC_Z, ALTRKCX,    KC_C,    KC_V,    KC_B,                         KC_N,    KC_M, KC_COMM, ALTRDOT, KC_SLSH,
   //|-------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+
-                                         LT1_ENT, LT2_ESC,    LT2_SPC,  LT1_BSP
+                                         LT1_ENT, LT2_ESC,    LT2_SPC,  LT1_UND
                                       //-----------------'  `------------------
   ),
 
@@ -139,6 +226,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 //   [1] = LAYOUT(
 //   //,-------------------------------------------.                    ,---------------------------------------------
 //      KC_EXLM, KC_DQUO, KC_LCBR, KC_RCBR, KC_PIPE,                      _______, KC_CIRC, KC_MINS, KC_QUOT, _______,
+   
 //   //|-------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+
 //      KC_NUHS,  KC_DLR, KC_LPRN, KC_RPRN,   SNUBS,                      _______,  KC_EQL, KC_UNDS,   KC_AT, KC_LGUI,
 //   //|-------+--------+--------+--------+--------j                    |--------+--------+--------+--------+--------+
@@ -148,16 +236,16 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 //                                       //-----------------'  `------------------
 //   ),
 
-// mac:
+// mac: ______
   [1] = LAYOUT(
   //,-------------------------------------------.                    ,---------------------------------------------
-     KC_EXLM,   KC_AT, KC_LCBR, KC_RCBR,KC_TILDE,                      _______, KC_CIRC, KC_MINS, KC_QUOT, _______,
+     KC_EXLM,   KC_AT, KC_LCBR, KC_RCBR,KC_TILDE,                      CPP_PTR, KC_CIRC, KC_MINS, KC_QUOT, CMD_GRV,
   //|-------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+
-     MAC_HSH,  KC_DLR, KC_LPRN, KC_RPRN, KC_PIPE,                      KC_LGUI,  KC_EQL, KC_UNDS, KC_DQUO, KC_LGUI,
+     MAC_HSH,  KC_DLR, KC_LPRN, KC_RPRN, KC_PIPE,                      KC_LGUI,  KC_EQL, KC_UNDS, KC_DQUO, KC_INS,
   //|-------+--------+--------+--------+--------j                    |--------+--------+--------+--------+--------+
-     KC_PERC, KC_HASH, KC_LBRC, KC_RBRC, KC_AMPR,                      _______, KC_BSLS, _______, _______, _______,
+     KC_PERC, KC_HASH, KC_LBRC, KC_RBRC, KC_AMPR,                      _______, KC_BSLS, KC_HOME,  KC_END, _______,
   //|-------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+
-                                         WNCLOSE, _______,    _______,  _______
+                                         _______, KC_LBRC,    KC_RBRC,  _______
                                       //-----------------'  `------------------
   ),
 
@@ -169,7 +257,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|-------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+
        KC_F4,   KC_F3,   KC_F2,   KC_F1, MVD_PRV,                         KC_0,    KC_1,    KC_2,    KC_3, KC_PMNS,
   //|-------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+
-                                         _______, _______,    _______,   KC_DEL
+                                         _______, _______,    CW_TOGG,   KC_DEL
                                       //-----------------'  `------------------
   ),
 
@@ -195,7 +283,20 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|-------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+
                                          _______, KC_BTN3,    KC_BTN1, KC_BTN2
                                       //-----------------'  `------------------
-  )
+  ),
+
+  //  // caps layout
+  // [5] = LAYOUT(
+  // //,-------------------------------------------.                    ,---------------------------------------------
+  //       KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                         KC_Y,    KC_U,    KC_I,    KC_O,   KC_P,
+  // //|-------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+
+  //       KC_A,    KC_S,    KC_D,    KC_F,    KC_G,                         KC_H,    KC_J,    KC_K,    KC_L, KC_SCLN,
+  // //|-------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+
+  //       KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,                         KC_N,    KC_M, KC_COMM,  KC_DOT, KC_SLSH,
+  // //|-------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+
+  //                                         KC_ENT,  KC_ESC,     KC_SPC,  KC_BSPC
+  //                                     //-----------------'  `------------------
+  // )
 
 //   [3] = LAYOUT(
 //   //,-------------------------------------------.                    ,---------------------------------------------
@@ -215,7 +316,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 //     KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,            KC_Y,    KC_U,  KC_I,    KC_O,   KC_P,
 //     KC_CTLA, KC_S,    KC_D,    KC_F,    KC_G,            KC_H,    KC_J,  KC_K,    KC_L,   KC_SCLN,
 //     KC_LSHZ, KC_X,    KC_C,    KC_V,    KC_B,            KC_N,    KC_M,  KC_COMM, KC_DOT, KC_RLSH,
-//                                     KC_CLGV, KC_BSM1, KC_SPM2, KC_GUTA
+//                                  _N,   KC_CLGV, KC_BSM1, KC_SPM2, KC_GUTA
 //   ),
 //
 //   [_LOWER] = LAYOUT(
@@ -228,7 +329,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 //   [_RAISE] = LAYOUT(
 //     KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,           KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,
 //     KC_TAB,  KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,         KC_MINS, KC_EQL,  KC_LBRC, KC_RBRC, KC_PIPE,
-//     KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,         KC_UNDS, KC_PLUS, KC_TRNS, KC_TRNS, QK_BOOT,
+//     KC_TRNS_N,, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,         KC_UNDS, KC_PLUS, KC_TRNS, KC_TRNS, QK_BOOT,
 //                                     KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS
 //   )
 // };
