@@ -89,22 +89,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     }
 };
 
-// bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-//     switch (keycode) {
-//     case CPP_PTR:
-//         if (record->event.pressed) {
-//             // when keycode CPP_PTR is pressed
-//             SEND_STRING("->");
-//         } else {
-//             // when keycode CPP_PTR is released
-//         }
-//         break;
-
-//     }
-//    default:
-//     return true;
-// };
-
 
 // customise caps word
 bool caps_word_press_user(uint16_t keycode) {
@@ -155,14 +139,7 @@ layer 4, mouse
 #define SFT_KCJ RSFT_T(KC_J)
 #define GUI_KCH LGUI_T(KC_H)
 
-// #define GUI_NUS LGUI_T(KC_NUHS)
-// #define ALT_DLR LALT_T(KC_DLR)
-// #define CTL_LPR LCTL_T(KC_LPRN)
-// #define SFT_RPR LSFT_T(KC_RPRN)
-
 #define ALT__AT LALT_T(KC_AT)
-// #define CTL_UND LCTL_T(KC_UNDS)
-// #define SFT_EQL LSFT_T(KC_EQL)
 
 
 #define GUI_PLS LGUI_T(KC_PPLS)
@@ -176,14 +153,10 @@ layer 4, mouse
 #define CTL__F6 LCTL_T(KC_F6)
 #define SFT__F5 LSFT_T(KC_F5)
 
-// #define LT1_UND KC_UNDS
-// #define LT1_UND LT(1, KC_UNDS)
-// #define LT1_UND LT(1, LSFT(KC_MINS))
 #define LT1_BSP LT(1, KC_BSPC)
 #define LT1_ENT LT(1, KC_ENT)
 #define LT2_ESC LT(2, KC_ESC)
 #define LT2_SPC LT(2, KC_SPC)
-// #define LT3_KCE LT(3, KC_E)
 #define LT3_KCR LT(3, KC_R)
 #define LT4_KCT LT(4, KC_T)
 
@@ -221,20 +194,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                          LT1_ENT, LT2_ESC,    LT2_SPC,  LT1_UND
                                       //-----------------'  `------------------
   ),
-
-// // linux and pc:
-//   [1] = LAYOUT(
-//   //,-------------------------------------------.                    ,---------------------------------------------
-//      KC_EXLM, KC_DQUO, KC_LCBR, KC_RCBR, KC_PIPE,                      _______, KC_CIRC, KC_MINS, KC_QUOT, _______,
-   
-//   //|-------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+
-//      KC_NUHS,  KC_DLR, KC_LPRN, KC_RPRN,   SNUBS,                      _______,  KC_EQL, KC_UNDS,   KC_AT, KC_LGUI,
-//   //|-------+--------+--------+--------+--------j                    |--------+--------+--------+--------+--------+
-//      KC_PERC, KC_HASH, KC_LBRC, KC_RBRC, KC_AMPR,                      _______, KC_NUBS, _______, _______, _______,
-//   //|-------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+
-//                                          WNCLOSE, _______,    _______,  _______
-//                                       //-----------------'  `------------------
-//   ),
 
 // mac: ______
   [1] = LAYOUT(
@@ -275,7 +234,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [4] = LAYOUT(
   //,-------------------------------------------.                    ,---------------------------------------------
-     _______, _______, _______, _______, _______,                      _______, KC_BTN1, KC_BTN3, KC_BTN2, _______,
+     _______, _______, _______, _______, _______,                       KC_TAB, KC_BTN1, KC_BTN3, KC_BTN2, _______,
   //|-------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+
      _______, _______, _______, _______, _______,                      KC_MS_L, KC_MS_D, KC_MS_U, KC_MS_R, _______,
   //|-------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+
@@ -284,6 +243,21 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                          _______, KC_BTN3,    KC_BTN1, KC_BTN2
                                       //-----------------'  `------------------
   ),
+
+// // linux and pc:
+//   [1] = LAYOUT(
+//   //,-------------------------------------------.                    ,---------------------------------------------
+//      KC_EXLM, KC_DQUO, KC_LCBR, KC_RCBR, KC_PIPE,                      _______, KC_CIRC, KC_MINS, KC_QUOT, _______,
+   
+//   //|-------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+
+//      KC_NUHS,  KC_DLR, KC_LPRN, KC_RPRN,   SNUBS,                      _______,  KC_EQL, KC_UNDS,   KC_AT, KC_LGUI,
+//   //|-------+--------+--------+--------+--------j                    |--------+--------+--------+--------+--------+
+//      KC_PERC, KC_HASH, KC_LBRC, KC_RBRC, KC_AMPR,                      _______, KC_NUBS, _______, _______, _______,
+//   //|-------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+
+//                                          WNCLOSE, _______,    _______,  _______
+//                                       //-----------------'  `------------------
+//   ),
+
 
   //  // caps layout
   // [5] = LAYOUT(
