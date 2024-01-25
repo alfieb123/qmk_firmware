@@ -55,6 +55,14 @@ combo_t key_combos[COMBO_COUNT] = {
 enum custom_keycodes {
     CPP_PTR = SAFE_RANGE,
     LT1_UND,
+    RBR_D,
+    LBR_D,
+    RBR_F,
+    LBR_F,
+    RBR_T,
+    LBR_T,
+    RBR_P,
+    LBR_P,
 };
 
 
@@ -62,12 +70,75 @@ static uint16_t key_timer;
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
+        // ------ THE POINTER ONE ------//
         case CPP_PTR:
             if (record->event.pressed) {
                 // when keycode CPP_PTR is pressed
                 SEND_STRING("->");
             }
             return false; // Skip all further processing of this key
+
+        // ------ CODE NAVIGATION IN HELIX ------//
+
+        case RBR_D:
+            if (record->event.pressed) {
+                // when keycode CPP_PTR is pressed
+                SEND_STRING("]d");
+            }
+            return false; // Skip all further processing of this key
+
+        case LBR_D:
+            if (record->event.pressed) {
+                // when keycode CPP_PTR is pressed
+                SEND_STRING("[d");
+            }
+            return false; // Skip all further processing of this key
+
+        case RBR_F:
+            if (record->event.pressed) {
+                // when keycode CPP_PTR is pressed
+                SEND_STRING("]f");
+            }
+            return false; // Skip all further processing of this key
+
+        case LBR_F:
+            if (record->event.pressed) {
+                // when keycode CPP_PTR is pressed
+                SEND_STRING("[f");
+            }
+            return false; // Skip all further processing of this key
+
+
+        case RBR_T:
+            if (record->event.pressed) {
+                // when keycode CPP_PTR is pressed
+                SEND_STRING("]t");
+            }
+            return false; // Skip all further processing of this key
+
+        case LBR_T:
+            if (record->event.pressed) {
+                // when keycode CPP_PTR is pressed
+                SEND_STRING("[t");
+            }
+            return false; // Skip all further processing of this key
+
+
+        case RBR_P:
+            if (record->event.pressed) {
+                // when keycode CPP_PTR is pressed
+                SEND_STRING("]p");
+            }
+            return false; // Skip all further processing of this key
+
+        case LBR_P:
+            if (record->event.pressed) {
+                // when keycode CPP_PTR is pressed
+                SEND_STRING("[p");
+            }
+            return false; // Skip all further processing of this key
+
+        // ------ CODE NAVIGATION IN HELIX ------//
 
         case LT1_UND:
             if (record->event.pressed) {
@@ -158,6 +229,7 @@ layer 4, mouse
 #define LT2_ESC LT(2, KC_ESC)
 #define LT2_SPC LT(2, KC_SPC)
 #define LT3_KCR LT(3, KC_R)
+#define LT3_KCM LT(3, KC_M)
 #define LT4_KCT LT(4, KC_T)
 
 // mac virtual desktops
@@ -189,7 +261,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|-------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+
         KC_A, ALT_KCS, CTL_KCD, SFT_KCF, GUI_KCG,                      GUI_KCH, SFT_KCJ, CTL_KCK, ALT_KCL, KC_SCLN,
   //|-------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+
-        KC_Z, ALTRKCX,    KC_C,    KC_V,    KC_B,                         KC_N,    KC_M, KC_COMM, ALTRDOT, KC_SLSH,
+        KC_Z, ALTRKCX,    KC_C,    KC_V,    KC_B,                         KC_N, LT3_KCM, KC_COMM, ALTRDOT, KC_SLSH,
   //|-------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+
                                          LT1_ENT, LT2_ESC,    LT2_SPC,  LT1_UND
                                       //-----------------'  `------------------
@@ -224,9 +296,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //,-------------------------------------------.                    ,---------------------------------------------
      _______, _______, _______, _______, _______,                      _______, KC_PGDN, KC_PGUP, _______, _______,
   //|-------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+
-     _______, _______, _______, _______, _______,                      KC_LEFT, KC_DOWN,   KC_UP, KC_RGHT, _______,
+     _______,   LBR_T,   LBR_D,   LBR_P,   LBR_F,                      KC_LEFT, KC_DOWN,   KC_UP, KC_RGHT, _______,
   //|-------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+
-     _______, _______, _______, _______, _______,                      _______, _______, _______, _______, _______,
+     _______,   RBR_T,   RBR_D,   RBR_P,   RBR_F,                      _______, _______, _______, _______, _______,
   //|-------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+
                                            KC_UP, KC_DOWN,    _______, _______
                                       //-----------------'  `------------------
