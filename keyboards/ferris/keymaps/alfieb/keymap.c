@@ -63,6 +63,7 @@ enum custom_keycodes {
     LBR_T,
     RBR_P,
     LBR_P,
+    XTHENV,
 };
 
 
@@ -137,6 +138,14 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 SEND_STRING("[p");
             }
             return false; // Skip all further processing of this key
+            
+        case XTHENV:
+            if (record->event.pressed) {
+                // when keycode CPP_PTR is pressed
+                SEND_STRING("xv");
+            }
+            return false; // Skip all further processing of this key
+
 
         // ------ CODE NAVIGATION IN HELIX ------//
 
@@ -294,11 +303,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [3] = LAYOUT(
   //,-------------------------------------------.                    ,---------------------------------------------
-     _______, _______, _______, _______, _______,                      _______, KC_PGDN, KC_PGUP, _______, _______,
+     _______,   LBR_T,   LBR_D,   LBR_P,   LBR_F,                      _______, KC_PGDN, KC_PGUP, _______, _______,
   //|-------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+
-     _______,   LBR_T,   LBR_D,   LBR_P,   LBR_F,                      KC_LEFT, KC_DOWN,   KC_UP, KC_RGHT, _______,
+     _______,   RBR_T,   RBR_D,   RBR_P,   RBR_F,                      KC_LEFT, KC_DOWN,   KC_UP, KC_RGHT, _______,
   //|-------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+
-     _______,   RBR_T,   RBR_D,   RBR_P,   RBR_F,                      _______, _______, _______, _______, _______,
+     _______,  XTHENV, _______, _______, _______,                      _______, _______,  XTHENV, _______, _______,
   //|-------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+
                                            KC_UP, KC_DOWN,    _______, _______
                                       //-----------------'  `------------------
