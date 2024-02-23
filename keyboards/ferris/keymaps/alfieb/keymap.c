@@ -55,6 +55,7 @@ combo_t key_combos[COMBO_COUNT] = {
 enum custom_keycodes {
     CPP_PTR = SAFE_RANGE,
     LT1_UND,
+    LT6_UND,
     RBR_D,
     LBR_D,
     RBR_F,
@@ -64,6 +65,8 @@ enum custom_keycodes {
     RBR_P,
     LBR_P,
     XTHENV,
+    PRLIN,
+    PRMAC
 };
 
 
@@ -149,11 +152,38 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
         // ------ CODE NAVIGATION IN HELIX ------//
 
+        case PRLIN: //print 'linux' so we can know our base layer
+            if (record->event.pressed) {
+                SEND_STRING("linux");
+            }
+            return false; // Skip all further processing of this key
+
+        case PRMAC: //print 'macos' so we can know our base layer
+            if (record->event.pressed) {
+                SEND_STRING("macos");
+            }
+            return false; // Skip all further processing of this key
+
         case LT1_UND:
             if (record->event.pressed) {
                 // Key has been pressed, start the timer
                 key_timer = timer_read();
                 layer_on(1); // Activate layer 1
+            } else {
+                // Key has been released, check the timer
+                if (timer_elapsed(key_timer) < TAPPING_TERM) {
+                    // Tapping term defines the time for a tap, if less, it's a tap
+                    tap_code16(KC_UNDS); // Send the underscore keycode
+                }
+                layer_off(1); // Deactivate layer 1 regardless of whether it was a tap or hold
+            }
+            return false; // Skip all further processing of this key
+
+        case LT6_UND:
+            if (record->event.pressed) {
+                // Key has been pressed, start the timer
+                key_timer = timer_read();
+                layer_on(6); // Activate layer 1
             } else {
                 // Key has been released, check the timer
                 if (timer_elapsed(key_timer) < TAPPING_TERM) {
@@ -235,6 +265,7 @@ layer 4, mouse
 
 #define LT1_BSP LT(1, KC_BSPC)
 #define LT1_ENT LT(1, KC_ENT)
+#define LT6_ENT LT(6, KC_ENT)
 #define LT2_ESC LT(2, KC_ESC)
 #define LT2_SPC LT(2, KC_SPC)
 #define LT3_KCR LT(3, KC_R)
@@ -264,7 +295,7 @@ layer 4, mouse
 
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-  [0] = LAYOUT(
+  [0] = LAYOUT( //macos base layer
   //,-------------------------------------------.                    ,---------------------------------------------
         KC_Q,    KC_W,    KC_E, LT3_KCR, LT4_KCT,                         KC_Y,    KC_U,    KC_I,    KC_O,   KC_P,
   //|-------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+
@@ -276,14 +307,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                       //-----------------'  `------------------
   ),
 
-// mac: ______
+// mac: symbols
   [1] = LAYOUT(
   //,-------------------------------------------.                    ,---------------------------------------------
      KC_EXLM,   KC_AT, KC_LCBR, KC_RCBR,KC_TILDE,                      CPP_PTR, KC_CIRC, KC_MINS, KC_QUOT, CMD_GRV,
   //|-------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+
      MAC_HSH,  KC_DLR, KC_LPRN, KC_RPRN, KC_PIPE,                      KC_LGUI,  KC_EQL, KC_UNDS, KC_DQUO, KC_INS,
   //|-------+--------+--------+--------+--------j                    |--------+--------+--------+--------+--------+
-     KC_PERC, KC_HASH, KC_LBRC, KC_RBRC, KC_AMPR,                       KC_GRV, KC_BSLS, KC_HOME,  KC_END, _______,
+     KC_PERC, KC_HASH, KC_LBRC, KC_RBRC, KC_AMPR,                       KC_GRV, KC_BSLS, KC_HOME,  KC_END,   PRMAC,
   //|-------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+
                                          _______, KC_LBRC,    KC_RBRC,  CMD_GRV
                                       //-----------------'  `------------------
@@ -313,17 +344,43 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                       //-----------------'  `------------------
   ),
 
-  [4] = LAYOUT(
-  //,-------------------------------------------.                    ,---------------------------------------------
+  [4] = LAYOUT( //DF sets the default layer, so df5 shoul be linux/win and df0 should be macos
+   //,-------------------------------------------.                    ,---------------------------------------------
      _______, _______, _______, _______, _______,                       KC_TAB, KC_BTN1, KC_BTN3, KC_BTN2, _______,
   //|-------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+
-     _______, _______, _______, _______, _______,                      KC_MS_L, KC_MS_D, KC_MS_U, KC_MS_R, _______,
+     _______, _______, _______, _______,   /*DF(5)*/_______,                      KC_MS_L, KC_MS_D, KC_MS_U, KC_MS_R, _______,
   //|-------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+
-     QK_BOOT, _______, _______, _______, _______,                      _______, KC_WH_D, KC_WH_U, _______, _______,
+     QK_BOOT, _______, _______, _______,   DF(0),                      _______, KC_WH_D, KC_WH_U, _______, _______,
   //|-------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+
                                          _______, KC_BTN3,    KC_BTN1, KC_BTN2
                                       //-----------------'  `------------------
-  ),
+  )//,
+
+  //[5] = LAYOUT( //linux base layer
+  ////,-------------------------------------------.                    ,---------------------------------------------
+        //KC_Q,    KC_W,    KC_E, LT3_KCR, LT4_KCT,                         KC_Y,    KC_U,    KC_I,    KC_O,   KC_P,
+  ////|-------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+
+        //KC_A, ALT_KCS, CTL_KCD, SFT_KCF, GUI_KCG,                      GUI_KCH, SFT_KCJ, CTL_KCK, ALT_KCL, KC_SCLN,
+  ////|-------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+
+        //KC_Z, ALTRKCX,    KC_C,    KC_V,    KC_B,                         KC_N, LT3_KCM, KC_COMM, ALTRDOT, KC_SLSH,
+  ////|-------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+
+                                         //LT6_ENT, LT2_ESC,    LT2_SPC,  LT6_UND
+                                      ////-----------------'  `------------------
+  //),
+//
+//// linux symbols
+  //[6] = LAYOUT(
+  ////,-------------------------------------------.                    ,---------------------------------------------
+     //KC_EXLM, KC_DQUO, KC_LCBR, KC_RCBR, KC_PIPE,                      CPP_PTR, KC_CIRC, KC_MINS, KC_QUOT, CMD_GRV,
+  ////|-------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+
+     //KC_NUHS,  KC_DLR, KC_LPRN, KC_RPRN,   SNUBS,                      KC_LGUI,  KC_EQL, KC_UNDS,   KC_AT, KC_INS,
+  ////|-------+--------+--------+--------+--------j                    |--------+--------+--------+--------+--------+
+     //KC_PERC, KC_HASH, KC_LBRC, KC_RBRC, KC_AMPR,                       KC_GRV, KC_BSLS, KC_HOME,  KC_END,   PRLIN,
+  ////|-------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+
+                                         //_______, KC_LBRC,    KC_RBRC,  CMD_GRV
+                                      ////-----------------'  `------------------
+  //)
+
 
 // // linux and pc:
 //   [1] = LAYOUT(
@@ -339,20 +396,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 //                                       //-----------------'  `------------------
 //   ),
 
-
-  //  // caps layout
-  // [5] = LAYOUT(
-  // //,-------------------------------------------.                    ,---------------------------------------------
-  //       KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                         KC_Y,    KC_U,    KC_I,    KC_O,   KC_P,
-  // //|-------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+
-  //       KC_A,    KC_S,    KC_D,    KC_F,    KC_G,                         KC_H,    KC_J,    KC_K,    KC_L, KC_SCLN,
-  // //|-------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+
-  //       KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,                         KC_N,    KC_M, KC_COMM,  KC_DOT, KC_SLSH,
-  // //|-------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+
-  //                                         KC_ENT,  KC_ESC,     KC_SPC,  KC_BSPC
-  //                                     //-----------------'  `------------------
-  // )
-
 //   [3] = LAYOUT(
 //   //,-------------------------------------------.                    ,---------------------------------------------
 //      _______, _______, _______, _______, _______,                      _______, _______, _______, _______, _______,
@@ -366,28 +409,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 //   )
 };
 
-// const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-//   [_QWERTY] = LAYOUT(
-//     KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,            KC_Y,    KC_U,  KC_I,    KC_O,   KC_P,
-//     KC_CTLA, KC_S,    KC_D,    KC_F,    KC_G,            KC_H,    KC_J,  KC_K,    KC_L,   KC_SCLN,
-//     KC_LSHZ, KC_X,    KC_C,    KC_V,    KC_B,            KC_N,    KC_M,  KC_COMM, KC_DOT, KC_RLSH,
-//                                  _N,   KC_CLGV, KC_BSM1, KC_SPM2, KC_GUTA
-//   ),
-//
-//   [_LOWER] = LAYOUT(
-//     KC_1,    KC_2,    KC_3,    KC_4,    KC_5,            KC_6,    KC_7,    KC_8,    KC_9,    KC_0,
-//     QK_GESC, KC_HOME, KC_PGDN, KC_PGUP, KC_END,          KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, KC_QUOT,
-//     KC_TRNS, KC_TRNS, KC_TRNS, KC_BTN1, KC_BTN2,         KC_MS_L, KC_MS_D, KC_MS_U, KC_MS_R, KC_ENT,
-//                                     KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS
-//   ),
-//
-//   [_RAISE] = LAYOUT(
-//     KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,           KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,
-//     KC_TAB,  KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,         KC_MINS, KC_EQL,  KC_LBRC, KC_RBRC, KC_PIPE,
-//     KC_TRNS_N,, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,         KC_UNDS, KC_PLUS, KC_TRNS, KC_TRNS, QK_BOOT,
-//                                     KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS
-//   )
-// };
 
 // Tap Dance Definitions
 qk_tap_dance_action_t tap_dance_actions[] = {
