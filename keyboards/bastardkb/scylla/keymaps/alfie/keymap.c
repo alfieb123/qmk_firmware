@@ -56,6 +56,7 @@
 
 enum custom_keycodes {
     CPP_PTR = SAFE_RANGE,
+    GXP_STR,
     LT1_UND,
     RBR_D,
     LBR_D,
@@ -73,6 +74,15 @@ static uint16_t key_timer;
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
+        // ------ the file path to the gexport script for when trying to pipe in jetbrains ------//
+        case GXP_STR:
+            if (record->event.pressed) {
+                // when keycode CPP_PTR is pressed
+                SEND_STRING(" cer /Users/alfie/Documents/_REPOSITORIES_/code_gen_scripts/godot_cpp_header_export_processor/gexport");
+            }
+            return false; // Skip all further processing of this key
+
+
         // ------ THE POINTER ONE ------//
         case CPP_PTR:
             if (record->event.pressed) {
@@ -224,7 +234,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 [3] = LAYOUT_split_4x6_5(
   _______, _______, _______, _______, _______, _______,     _______, _______, _______, _______, _______, _______,
-  _______, _______, _______, _______, _______, _______,     _______, _______, _______, _______, _______, _______,
+  _______, _______, _______, _______, _______, _______,     _______, GXP_STR, _______, _______, _______, _______,
   _______, _______, _______, _______, _______, _______,     KC_LEFT, KC_DOWN,   KC_UP,KC_RIGHT, _______, _______,
   _______, _______, _______, _______, _______, _______,     _______, _______, _______, _______, _______, _______,
                              _______, _______, _______,     _______, _______, _______,
