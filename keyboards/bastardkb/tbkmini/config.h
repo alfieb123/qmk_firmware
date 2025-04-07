@@ -34,6 +34,7 @@
 #define RGBLED_SPLIT \
     { 21, 21 }
 
+
 /* RGB matrix support. */
 #ifdef RGB_MATRIX_ENABLE
 #    define SPLIT_TRANSPORT_MIRROR
