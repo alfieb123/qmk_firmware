@@ -39,10 +39,10 @@
 #define BOTH_SHIFTS_TURNS_ON_CAPS_WORD
 
 // Tap-Hold and Mod-Tap timing tweaks to mimic ZMK
-#define TAPPING_TERM 220              // Matches ZMK tapping-term-ms
-#define QUICK_TAP_TERM 165            // Matches ZMK quick_tap_ms
+#define TAPPING_TERM 180              // Matches ZMK tapping-term-ms
+/*#define QUICK_TAP_TERM 165            // Matches ZMK quick_tap_ms*/
 #define IGNORE_MOD_TAP_INTERRUPT      // Prevents accidental hold when typing fast
-#define HOLD_ON_OTHER_KEY_PRESS       // Only trigger hold if another key is pressed
+/*#define HOLD_ON_OTHER_KEY_PRESS       // Only trigger hold if another key is pressed*/
 //#define PERMISSIVE_HOLD             // Optional: enables early hold, try it disabled first
 
 // Optional: if you want more fine-tuned control per key
