@@ -42,9 +42,9 @@ combo_t key_combos[COMBO_COUNT] = {
     COMBO(c_tab, KC_TAB), // tab
     // COMBO(c_unds, KC_UNDS), //underscore
     COMBO(c_mins, KC_MINS), //minus
-    COMBO(c_eql, KC_EQL), //equal 
+    COMBO(c_eql, KC_EQL), //equal
     //COMBO(c_dquo, KC_AT), // this is a double quote ". notice we are using kc_at which is noramlly the at symbol but not on uk for some reason. ONLY windows and linux!
-    COMBO(c_dquo, KC_DQUO),
+    COMBO(c_dquo, KC_AT),
    //  COMBO(c_mo3, MO(3)), // layer toggle to layer
    //  COMBO(c_lgui, KC_LGUI), // Os key
    //  COMBO(c_lgui2, KC_LGUI), // Os key
@@ -141,7 +141,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 SEND_STRING("[p");
             }
             return false; // Skip all further processing of this key
-            
+
         case XTHENV:
             if (record->event.pressed) {
                 // when keycode CPP_PTR is pressed
@@ -214,7 +214,7 @@ bool caps_word_press_user(uint16_t keycode) {
         case KC_BSPC:
         case KC_DEL:
         case KC_UNDS:
-        case KC_SPC: 
+        case KC_SPC:
             return true;
 
         default:
@@ -307,17 +307,17 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                       //-----------------'  `------------------
   ),
 
-// mac: symbols
+   // linux symbols
   [1] = LAYOUT(
   //,-------------------------------------------.                    ,---------------------------------------------
-     KC_EXLM,   KC_AT, KC_LCBR, KC_RCBR,KC_TILDE,                      CPP_PTR, KC_CIRC, KC_MINS, KC_QUOT, CMD_GRV,
+   KC_EXLM, KC_DQUO, KC_LCBR, KC_RCBR, KC_PIPE,                      CPP_PTR, KC_CIRC, KC_MINS, KC_QUOT, CMD_GRV,
   //|-------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+
-     MAC_HSH,  KC_DLR, KC_LPRN, KC_RPRN, KC_PIPE,                      KC_LGUI,  KC_EQL, KC_UNDS, KC_DQUO, KC_INS,
+   KC_NUHS,  KC_DLR, KC_LPRN, KC_RPRN,   SNUBS,                      KC_LGUI,  KC_EQL, KC_UNDS,   KC_AT, KC_INS,
   //|-------+--------+--------+--------+--------j                    |--------+--------+--------+--------+--------+
-     KC_PERC, KC_HASH, KC_LBRC, KC_RBRC, KC_AMPR,                       KC_GRV, KC_BSLS, KC_HOME,  KC_END,   PRMAC,
+   KC_PERC, KC_HASH, KC_LBRC, KC_RBRC, KC_AMPR,                       KC_GRV, KC_BSLS, KC_HOME,  KC_END,   PRLIN,
   //|-------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+
-                                         _______, KC_LBRC,    KC_RBRC,  CMD_GRV
-                                      //-----------------'  `------------------
+                                       _______, KC_LBRC,    KC_RBRC,  CMD_GRV
+                                    ////-----------------'  `------------------
   ),
 
   [2] = LAYOUT(
@@ -386,7 +386,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 //   [1] = LAYOUT(
 //   //,-------------------------------------------.                    ,---------------------------------------------
 //      KC_EXLM, KC_DQUO, KC_LCBR, KC_RCBR, KC_PIPE,                      _______, KC_CIRC, KC_MINS, KC_QUOT, _______,
-   
+
 //   //|-------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+
 //      KC_NUHS,  KC_DLR, KC_LPRN, KC_RPRN,   SNUBS,                      _______,  KC_EQL, KC_UNDS,   KC_AT, KC_LGUI,
 //   //|-------+--------+--------+--------+--------j                    |--------+--------+--------+--------+--------+
